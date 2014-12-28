@@ -92,3 +92,5 @@ log/
 *.war
 *.ear
 *.db
+
+build
