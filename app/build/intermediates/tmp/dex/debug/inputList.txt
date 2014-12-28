@@ -1,0 +1,1 @@
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\classes\debug
