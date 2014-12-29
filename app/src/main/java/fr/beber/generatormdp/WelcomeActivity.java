@@ -9,6 +9,18 @@ import android.widget.ImageView;
 
 public class WelcomeActivity extends Activity {
     /**
+     * Permet de passer à l'activity suivante.
+     */
+    private View.OnClickListener clickListenerLogo = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+    /**
      * Called when the activity is first created.
      */
     @Override
@@ -22,22 +34,10 @@ public class WelcomeActivity extends Activity {
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
+            @Override
             public void run() {
-                imageViewLogo.setOnClickListener(clickListenerLogo);
+                imageViewLogo.performClick();
             }
         }, 2000);
     }
-
-
-    /**
-     * Permet de passer à l'activity suivante.
-     */
-    private View.OnClickListener clickListenerLogo = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
 }
