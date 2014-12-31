@@ -56,4 +56,8 @@ public class StableMDPAdapter extends ArrayAdapter<Mdp> {
         return rowView;
     }
 
+    @Override
+    public Mdp getItem(int position) {
+        return super.getItem(position);
+    }
 }

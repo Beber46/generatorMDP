@@ -5,6 +5,8 @@
     <string name="title_activity_main">MDP</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Options</string>
+    <string name="action_modify">Modifier</string>
     <string name="action_add">Ajouter</string>
+    <string name="title_activity_mdpdetails">MDPDetailsActivity</string>
 
 </resources>

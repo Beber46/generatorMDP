@@ -81,7 +81,7 @@ public class ApplicationDAO extends Repository<Application> {
         final ContentValues contentValues = new ContentValues();
 
         contentValues.put(mColumn[1], application.getName());
-        contentValues.put(mColumn[2], application.getDescription());
+        contentValues.put(mColumn[2], application.getDescription()!=null?application.getDescription():"");
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
 
         mBDD.insert(BDD.TN_APP, null, contentValues);
@@ -97,8 +97,8 @@ public class ApplicationDAO extends Repository<Application> {
         final ContentValues contentValues = new ContentValues();
 
         contentValues.put(mColumn[1], application.getName());
-        contentValues.put(mColumn[2], application.getDescription());
-        contentValues.put(mColumn[3], application.getPicture());
+        contentValues.put(mColumn[2], application.getDescription()!=null?application.getDescription():"");
+        contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
 
         mBDD.update(BDD.TN_APP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
         Log.d(this.getClass().getName(), "Sortie");
@@ -122,7 +122,8 @@ public class ApplicationDAO extends Repository<Application> {
         final Application application = new Application();
         application.setId(cursor.getInt(BDD.APP_NUM_ID));
         application.setName(cursor.getString(BDD.APP_NUM_NAME));
-        application.setDescription(cursor.getString(BDD.APP_NUM_DES));
+        final String description = cursor.getString(BDD.APP_NUM_DES);
+        application.setDescription(description.length()>0?description:null);
         final String picture = cursor.getString(BDD.APP_NUM_PIC);
         application.setPicture(picture.length()>0?picture:null);
 

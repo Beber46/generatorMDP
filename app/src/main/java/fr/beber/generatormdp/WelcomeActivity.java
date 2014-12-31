@@ -15,6 +15,8 @@ import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Level;
 import fr.beber.generatormdp.bean.Mdp;
 
+import java.util.List;
+
 public class WelcomeActivity extends Activity {
     /**
      * Permet de passer à l'activity suivante.
@@ -40,7 +42,13 @@ public class WelcomeActivity extends Activity {
 
         imageViewLogo.setOnClickListener(this.clickListenerLogo);
 
-        this.initBDDTest(this);
+        final LevelDAO levelDAO = new LevelDAO(this);
+        levelDAO.openOnlyRead();
+        final List<Level> list = levelDAO.getAll();
+        levelDAO.close();
+
+        if(list.size()==0)
+            this.initBDDTest(this);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
