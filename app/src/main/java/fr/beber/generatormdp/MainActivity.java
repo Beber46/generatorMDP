@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import fr.beber.generatormdp.adapter.StableMDPAdapter;
+import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.bean.Mdp;
+
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -12,6 +18,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final MdpDAO mdpDAO = new MdpDAO(this);
+        mdpDAO.openOnlyRead();
+        final List<Mdp> applicationList = mdpDAO.getAll();
+        mdpDAO.close();
+
+        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(this,android.R.layout.simple_list_item_1,applicationList);
+        final ListView listview = (ListView) findViewById(R.id.LVmdp);
+
+        listview.setAdapter(stableMDPAdapter);
     }
 
 

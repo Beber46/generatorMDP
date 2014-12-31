@@ -82,9 +82,9 @@ public class ApplicationDAO extends Repository<Application> {
 
         contentValues.put(mColumn[1], application.getName());
         contentValues.put(mColumn[2], application.getDescription());
-        contentValues.put(mColumn[3], application.getPicture());
+        contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
 
-        mBDD.insert(BDD.TN_LEVEL, null, contentValues);
+        mBDD.insert(BDD.TN_APP, null, contentValues);
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -100,7 +100,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[2], application.getDescription());
         contentValues.put(mColumn[3], application.getPicture());
 
-        mBDD.update(BDD.TN_LEVEL, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
+        mBDD.update(BDD.TN_APP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -110,7 +110,7 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public void delete(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        mBDD.delete(BDD.TN_LEVEL, mColumn[0] + "=?", new String[]{String.valueOf(id)});
+        mBDD.delete(BDD.TN_APP, mColumn[0] + "=?", new String[]{String.valueOf(id)});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -123,7 +123,8 @@ public class ApplicationDAO extends Repository<Application> {
         application.setId(cursor.getInt(BDD.APP_NUM_ID));
         application.setName(cursor.getString(BDD.APP_NUM_NAME));
         application.setDescription(cursor.getString(BDD.APP_NUM_DES));
-        application.setPicture(cursor.getString(BDD.APP_NUM_PIC));
+        final String picture = cursor.getString(BDD.APP_NUM_PIC);
+        application.setPicture(picture.length()>0?picture:null);
 
         return application;
     }
