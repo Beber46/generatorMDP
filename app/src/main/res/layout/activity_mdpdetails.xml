@@ -47,7 +47,7 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Supprimer"
+            android:text="@string/button_delete"
             android:id="@+id/BTDelete"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>

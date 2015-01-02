@@ -54,7 +54,12 @@ public class MainActivity extends ListActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add) {
+            final Intent intent = new Intent(getApplicationContext(),AddMDPActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_settings) {
             return true;
         }
 

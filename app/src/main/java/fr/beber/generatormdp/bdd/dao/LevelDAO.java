@@ -9,6 +9,7 @@ import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.Repository;
 import fr.beber.generatormdp.bean.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,6 +57,18 @@ public class LevelDAO extends Repository<Level> {
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToListObject(cursor);
+    }
+
+    /**
+     * Permet d'obtenir la liste des nom des applications.
+     * @return La liste des noms.
+     */
+    public List<String> getAllName() {
+        Log.d(this.getClass().getName(), "Entree");
+        final Cursor cursor = mBDD.query(BDD.TN_LEVEL, mColumn, null, null, null, null, null);
+
+        Log.d(this.getClass().getName(), "Sortie");
+        return getListNameLevel(cursor);
     }
 
     /**
@@ -121,5 +134,38 @@ public class LevelDAO extends Repository<Level> {
         level.setColor(cursor.getString(BDD.LEVEL_NUM_COLOR));
 
         return level;
+    }
+
+
+    /**
+     * Permet d'obtenir le nom des applications.
+     * @param cursor à convertir.
+     * @return le nom de l'applicaiton.
+     */
+    public String getNameLevel(final Cursor cursor) {
+        return cursor.getString(BDD.LEVEL_NUM_NAME);
+    }
+
+    /**
+     * Permet de convertire un {@link android.database.Cursor} en liste de {@link String}.
+     *
+     * @param cursor à convertir.
+     * @return Une liste de {@link String} trouvé.
+     */
+    public List<String> getListNameLevel(final Cursor cursor) {
+        final List<String> liste = new ArrayList<String>();
+
+        if (cursor.getCount() == 0)
+            return liste;
+
+        cursor.moveToFirst();
+        do {
+            String exec = this.getNameLevel(cursor);
+            liste.add(exec);
+        } while (cursor.moveToNext());
+
+        cursor.close();
+
+        return liste;
     }
 }

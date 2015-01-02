@@ -5,4 +5,6 @@
 
     <dimen name="relative_marginh_mdpdetails">15dp</dimen>
     <dimen name="relative_marginv_mdpdetails">15dp</dimen>
+
+    <dimen name="linear_padding_addactivity">20dp</dimen>
 </resources>

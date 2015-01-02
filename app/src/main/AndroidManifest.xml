@@ -29,6 +29,16 @@
         <activity
             android:name=".MDPDetailsActivity"
             android:label="" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="fr.beber.generatormdp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddMDPActivity"
+            android:label="@string/title_activity_add_mdp" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.beber.generatormdp.MainActivity" />
         </activity>
     </application>
 
