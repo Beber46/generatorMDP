@@ -32,7 +32,7 @@ public interface IRepository<T> {
      *
      * @param entite à enregistrer.
      */
-    public void save(final T entite);
+    public long save(final T entite);
 
     /**
      * Permet de mettre à jour un {@link T}.

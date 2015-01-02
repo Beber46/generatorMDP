@@ -19,12 +19,6 @@
                 android:prompt="@string/application_prompt"
                 android:id="@+id/spinApplication"/>
 
-        <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/level_prompt"
-                android:id="@+id/spinLevel"/>
-
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -56,8 +50,21 @@
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/textview_minuscule"
+                android:checked="true"
+                android:id="@+id/checkBoxMinuscule"/>
+
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/textview_majuscule"
                 android:id="@+id/checkBoxMajuscule"/>
+
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textview_special"
+                android:id="@+id/checkBoSpec"/>
 
     </LinearLayout>
 

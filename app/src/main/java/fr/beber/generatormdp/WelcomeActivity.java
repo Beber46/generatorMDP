@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import fr.beber.generatormdp.bdd.BDD;
@@ -78,13 +79,32 @@ public class WelcomeActivity extends Activity {
         applicationDAO.close();
 
         final LevelDAO levelDAO = new LevelDAO(context);
-        final Level level = new Level();
-        level.setName("Haut");
-        level.setColor("Rouge");
-
         levelDAO.open();
+        final Level level = new Level();
+        level.setName("Minimum");
+        level.setColor("Blanc");
         levelDAO.save(level);
         levelDAO.close();
+
+        Log.d(getClass().getName(),level.toString());
+
+        levelDAO.open();
+        final Level level1 = new Level();
+        level1.setName("Millieu");
+        level1.setColor("Orange");
+        levelDAO.save(level1);
+        levelDAO.close();
+
+        Log.d(getClass().getName(),level.toString());
+
+        levelDAO.open();
+        final Level level2 = new Level();
+        level2.setName("Haut");
+        level2.setColor("Rouge");
+        levelDAO.save(level2);
+        levelDAO.close();
+
+        Log.d(getClass().getName(),level2.toString());
 
         final MdpDAO mdpDAO = new MdpDAO(context);
         final Mdp mdp = new Mdp();

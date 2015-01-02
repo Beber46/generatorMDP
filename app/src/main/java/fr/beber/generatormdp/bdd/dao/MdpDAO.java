@@ -65,7 +65,7 @@ public class MdpDAO extends Repository<Mdp> {
     @Override
     public Mdp getById(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_MDP, mColumn, id.toString(), null, null, null, null);
+        final Cursor cursor = mBDD.query(BDD.TN_MDP, mColumn, mColumn[0] + "=?", new String[]{id.toString()}, null, null, null);
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToOneObject(cursor);
@@ -75,7 +75,7 @@ public class MdpDAO extends Repository<Mdp> {
      * {@inheritDoc}
      */
     @Override
-    public void save(final Mdp mdp) {
+    public long save(final Mdp mdp) {
         Log.d(this.getClass().getName(), "Entree");
         final ContentValues contentValues = new ContentValues();
 
@@ -83,8 +83,7 @@ public class MdpDAO extends Repository<Mdp> {
         contentValues.put(mColumn[2], mdp.getApp());
         contentValues.put(mColumn[3], mdp.getLevel());
 
-        mBDD.insert(BDD.TN_MDP, null, contentValues);
-        Log.d(this.getClass().getName(), "Sortie");
+        return mBDD.insert(BDD.TN_MDP, null, contentValues);
     }
 
     /**

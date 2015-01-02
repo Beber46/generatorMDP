@@ -55,7 +55,7 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public List<Application> getAll() {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_APP, mColumn, null, null, null, null, null);
+        final Cursor cursor = mBDD.query(BDD.TN_APP, mColumn, null, null, null, null, mColumn[1]);
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToListObject(cursor);
@@ -89,7 +89,7 @@ public class ApplicationDAO extends Repository<Application> {
      * {@inheritDoc}
      */
     @Override
-    public void save(final Application application) {
+    public long save(final Application application) {
         Log.d(this.getClass().getName(), "Entree");
         final ContentValues contentValues = new ContentValues();
 
@@ -97,8 +97,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[2], application.getDescription()!=null?application.getDescription():"");
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
 
-        mBDD.insert(BDD.TN_APP, null, contentValues);
-        Log.d(this.getClass().getName(), "Sortie");
+        return mBDD.insert(BDD.TN_APP, null, contentValues);
     }
 
     /**

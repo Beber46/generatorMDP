@@ -12,16 +12,15 @@
     <string name="title_activity_mdpdetails">MDPDetailsActivity</string>
     <string name="title_activity_add_mdp">AddMDPActivity</string>
 
-    <string name="textview_application">Application :</string>
-    <string name="textview_level">Niveau :</string>
     <string name="textview_size">Taille :</string>
     <string name="textview_numeric">Numérique</string>
     <string name="textview_majuscule">Majuscule</string>
+    <string name="textview_minuscule">Minuscule</string>
+    <string name="textview_special">Caractères spécieaux</string>
 
     <string name="button_delete">Supprimer</string>
     <string name="button_validate">Valider</string>
 
-    <string name="level_prompt">Niveau</string>
     <string name="application_prompt">Application</string>
 
 </resources>

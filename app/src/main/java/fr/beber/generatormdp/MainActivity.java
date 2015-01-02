@@ -23,10 +23,10 @@ public class MainActivity extends ListActivity {
 
         final MdpDAO mdpDAO = new MdpDAO(this);
         mdpDAO.openOnlyRead();
-        final List<Mdp> applicationList = mdpDAO.getAll();
+        final List<Mdp> mdpList = mdpDAO.getAll();
         mdpDAO.close();
 
-        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(this,android.R.layout.simple_list_item_1,applicationList);
+        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,mdpList);
         setListAdapter(stableMDPAdapter);
     }
 
@@ -38,6 +38,18 @@ public class MainActivity extends ListActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final MdpDAO mdpDAO = new MdpDAO(this);
+        mdpDAO.openOnlyRead();
+        final List<Mdp> applicationList = mdpDAO.getAll();
+        mdpDAO.close();
+
+        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,applicationList);
+        setListAdapter(stableMDPAdapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

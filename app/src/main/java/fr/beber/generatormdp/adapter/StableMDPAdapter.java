@@ -1,6 +1,7 @@
 package fr.beber.generatormdp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import fr.beber.generatormdp.R;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.LevelDAO;
+import fr.beber.generatormdp.bean.Level;
 import fr.beber.generatormdp.bean.Mdp;
 
 import java.util.HashMap;
@@ -49,9 +51,10 @@ public class StableMDPAdapter extends ArrayAdapter<Mdp> {
 
         final LevelDAO levelDAO = new LevelDAO(this.context);
         levelDAO.openOnlyRead();
-        textViewSecond.setText(levelDAO.getById(mdpList.get(position).getLevel()).getName());
+        final Level level = levelDAO.getById(mdpList.get(position).getLevel());
+        Log.d(getClass().getName(),level.toString());
+        textViewSecond.setText(level.getName());
         levelDAO.close();
-
 
         return rowView;
     }

@@ -41,6 +41,8 @@ public class MDPDetailsActivity extends Activity {
 
             final TextView textViewMdp = (TextView) findViewById(R.id.TVMDP);
             textViewMdp.setText(mdp.getMdp());
+
+            Log.d(getClass().getName(),mdp.toString());
         }
     }
 

@@ -3,48 +3,87 @@ package fr.beber.generatormdp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import fr.beber.generatormdp.adapter.SpinApplicationAdapter;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
-import fr.beber.generatormdp.bdd.dao.LevelDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
+import fr.beber.generatormdp.util.GenerateMDP;
 
 
 public class AddMDPActivity extends Activity {
 
     private static final int MIN_VALUE = 4;
+    private Boolean isNumeric = Boolean.FALSE;
+    private Boolean isMinuscule = Boolean.TRUE;
+    private Boolean isMajuscule = Boolean.FALSE;
+    private Boolean isSpecial = Boolean.FALSE;
+    private TextView seekBadValue;
+    private Integer appId;
+    private final View.OnClickListener onClickListenerValidate = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            final GenerateMDP generateMDP = new GenerateMDP(getApplicationContext(),isNumeric,isMinuscule,isMajuscule,isSpecial,Integer.valueOf(String.valueOf(seekBadValue.getText())));
+
+            Log.d(getClass().getName(),generateMDP.toString());
+
+            final Mdp mdp = new Mdp();
+            mdp.setMdp(generateMDP.getPassWord());
+            mdp.setLevel(generateMDP.getLevel());
+            mdp.setApp(appId);
+
+            final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
+
+            final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
+            mdpDAO.open();
+            intent.putExtra(Constante.MDPID, String.valueOf(mdpDAO.save(mdp)));
+            Log.d(getClass().getName(), mdp.toString());
+            mdpDAO.close();
+
+            startActivity(intent);
+            finish();
+        }
+    };
+    private SpinApplicationAdapter adapterListApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mdp);
 
-        final TextView seekBadValue = (TextView)findViewById(R.id.seekBarTV);
+        this.seekBadValue = (TextView)findViewById(R.id.seekBarTV);
         seekBadValue.setText(String.valueOf(MIN_VALUE));
 
         final ApplicationDAO applicationDAO = new ApplicationDAO(this);
         applicationDAO.openOnlyRead();
-        final ArrayAdapter<String> adapterListApplication = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, applicationDAO.getAllName());
+        adapterListApplication = new SpinApplicationAdapter(this,  android.R.layout.simple_spinner_item, applicationDAO.getAll());
         applicationDAO.close();
 
         final Spinner spinnerApplication = (Spinner)findViewById(R.id.spinApplication);
         spinnerApplication.setAdapter(adapterListApplication);
 
-        final LevelDAO levelDAO = new LevelDAO(this);
-        levelDAO.openOnlyRead();
-        final ArrayAdapter<String> adapterListLevel = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, levelDAO.getAllName());
-        levelDAO.close();
+        spinnerApplication.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                appId = adapterListApplication.getItem(position).getId();
+            }
 
-        final Spinner spinnerLevel = (Spinner)findViewById(R.id.spinLevel);
-        spinnerLevel.setAdapter(adapterListLevel);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         final SeekBar seekBar = (SeekBar)findViewById(R.id.seekBarsize);
         seekBar.setMax(32);
@@ -72,22 +111,41 @@ public class AddMDPActivity extends Activity {
             }
         });
 
-        final Button buttonValidate = (Button)findViewById(R.id.BTValidate);
-        buttonValidate.setOnClickListener(new View.OnClickListener() {
+        final CheckBox checkBoxNumeric = (CheckBox)findViewById(R.id.checkBoxNumerique);
+        checkBoxNumeric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
-                mdpDAO.openOnlyRead();
-                final Mdp mdp = mdpDAO.getAll().get(0);
-                mdpDAO.close();
-                final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
-                intent.putExtra(Constante.MDPID,String.valueOf(mdp.getId()));
-                startActivity(intent);
-                finish();
+                isNumeric = ((CheckBox) view).isChecked();
             }
         });
-    }
 
+        final CheckBox checkBoxSpec = (CheckBox)findViewById(R.id.checkBoSpec);
+        checkBoxSpec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isSpecial = ((CheckBox) view).isChecked();
+            }
+        });
+
+        final CheckBox checkBoxMin = (CheckBox)findViewById(R.id.checkBoxMinuscule);
+        checkBoxMin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isMinuscule = ((CheckBox)view).isChecked();
+            }
+        });
+
+        final CheckBox checkBoxMaj = (CheckBox)findViewById(R.id.checkBoxMajuscule);
+        checkBoxMaj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isMajuscule = ((CheckBox)view).isChecked();
+            }
+        });
+
+        final Button buttonValidate = (Button)findViewById(R.id.BTValidate);
+        buttonValidate.setOnClickListener(this.onClickListenerValidate);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
