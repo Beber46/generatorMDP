@@ -30,8 +30,8 @@
             android:name=".MDPDetailsActivity"
             android:label="" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="fr.beber.generatormdp.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.beber.generatormdp.MainActivity" />
         </activity>
         <activity
             android:name=".AddMDPActivity"
@@ -39,6 +39,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.beber.generatormdp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ModifyMDPActivity"
+            android:label="@string/title_activity_modify_mdp" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.beber.generatormdp.MDPDetailsActivity" />
         </activity>
     </application>
 

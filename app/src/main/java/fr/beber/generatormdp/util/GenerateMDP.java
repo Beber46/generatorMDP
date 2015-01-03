@@ -1,7 +1,6 @@
 package fr.beber.generatormdp.util;
 
 import android.content.Context;
-import android.util.Log;
 import fr.beber.generatormdp.bdd.dao.LevelDAO;
 import fr.beber.generatormdp.bean.Level;
 
@@ -86,9 +85,7 @@ public class GenerateMDP {
         int position = this.getRandomValue(0,max-1);
 
         while(password.length()<this.size){
-            Log.d(getClass().getName(),"max : "+max+" \nposition : "+position);
             final String op = operation.get(position);
-            Log.d(getClass().getName(),"op : "+op);
             password = password + op.charAt(this.getRandomValue(0, op.length()-1));
 
             position = this.getRandomValue(0,max-1);
@@ -122,9 +119,6 @@ public class GenerateMDP {
         levelDAO.openOnlyRead();
         final List<Level> levelList = levelDAO.getAll();
         levelDAO.close();
-
-        Log.d(getClass().getName(),"calcul "+operation.size());
-        Log.d(getClass().getName(),"siz "+levelList.size());
 
         if(operation.size()<=2)
             level = levelList.get(0).getId(); //min

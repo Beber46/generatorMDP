@@ -23,7 +23,6 @@ import fr.beber.generatormdp.util.GenerateMDP;
 
 public class AddMDPActivity extends Activity {
 
-    private static final int MIN_VALUE = 4;
     private Boolean isNumeric = Boolean.FALSE;
     private Boolean isMinuscule = Boolean.TRUE;
     private Boolean isMajuscule = Boolean.FALSE;
@@ -48,7 +47,6 @@ public class AddMDPActivity extends Activity {
             final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
             mdpDAO.open();
             intent.putExtra(Constante.MDPID, String.valueOf(mdpDAO.save(mdp)));
-            Log.d(getClass().getName(), mdp.toString());
             mdpDAO.close();
 
             startActivity(intent);
@@ -63,7 +61,7 @@ public class AddMDPActivity extends Activity {
         setContentView(R.layout.activity_add_mdp);
 
         this.seekBadValue = (TextView)findViewById(R.id.seekBarTV);
-        seekBadValue.setText(String.valueOf(MIN_VALUE));
+        seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
 
         final ApplicationDAO applicationDAO = new ApplicationDAO(this);
         applicationDAO.openOnlyRead();
@@ -102,11 +100,10 @@ public class AddMDPActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                if (progress < MIN_VALUE) {
-                    seekBar.setProgress(MIN_VALUE);
-                    seekBadValue.setText(String.valueOf(MIN_VALUE));
-                }
-                else
+                if (progress < Constante.MIN_VALUE) {
+                    seekBar.setProgress(Constante.MIN_VALUE);
+                    seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
+                } else
                     seekBadValue.setText(String.valueOf(progress));
             }
         });

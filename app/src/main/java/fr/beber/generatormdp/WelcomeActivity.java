@@ -78,6 +78,14 @@ public class WelcomeActivity extends Activity {
         applicationDAO.save(application);
         applicationDAO.close();
 
+        final Application application1 = new Application();
+        application1.setName("Facebook");
+        application1.setDescription("Réseau social de Facebook.");
+
+        applicationDAO.open();
+        applicationDAO.save(application1);
+        applicationDAO.close();
+
         final LevelDAO levelDAO = new LevelDAO(context);
         levelDAO.open();
         final Level level = new Level();

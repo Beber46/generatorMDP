@@ -64,7 +64,7 @@ public class LevelDAO extends Repository<Level> {
     @Override
     public Level getById(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.rawQuery("SELECT _id,"+mColumn[1]+","+mColumn[2]+" FROM "+BDD.TN_LEVEL+" WHERE "+mColumn[0]+" = ?",new String[]{String.valueOf(id)});
+        final Cursor cursor = mBDD.rawQuery("SELECT "+this.getAllParams()+" FROM "+BDD.TN_LEVEL+" WHERE "+mColumn[0]+" = ?",new String[]{String.valueOf(id)});
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToOneObject(cursor);
@@ -120,5 +120,22 @@ public class LevelDAO extends Repository<Level> {
         level.setColor(cursor.getString(BDD.LEVEL_NUM_COLOR));
 
         return level;
+    }
+
+    /**
+     * Retourne tous les champs de table en un seul string, util pour les selects.
+     * @return la selection.
+     */
+    private String getAllParams(){
+        String retour = "";
+
+        for(int i = 0; i<mColumn.length;i++){
+            retour = retour + mColumn[i];
+
+            if(i!=(mColumn.length-1))
+                retour = retour + ", ";
+        }
+
+        return retour;
     }
 }
