@@ -8,6 +8,7 @@ import android.util.Log;
 import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.Repository;
 import fr.beber.generatormdp.bean.Application;
+import fr.beber.generatormdp.util.QueryBuilder;
 
 import java.util.List;
 
@@ -54,7 +55,12 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public List<Application> getAll() {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_APP, mColumn, null, null, null, null, mColumn[1]);
+
+        final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
+        queryBuilder.addTable(BDD.TN_APP);
+        queryBuilder.setOrderBy(mColumn[1]);
+
+        final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToListObject(cursor);
@@ -66,7 +72,12 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public Application getById(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.rawQuery("SELECT "+this.getAllParams()+" FROM "+BDD.TN_APP+" WHERE "+mColumn[0]+" = ?",new String[]{String.valueOf(id)});
+
+        final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
+        queryBuilder.addTable(BDD.TN_APP);
+        queryBuilder.addConstraint(""+mColumn[0]+" = ?",String.valueOf(id));
+
+        final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToOneObject(cursor);

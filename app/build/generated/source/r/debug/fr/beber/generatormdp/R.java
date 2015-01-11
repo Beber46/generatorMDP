@@ -23,19 +23,18 @@ public final class R {
         public static final int welcome=0x7f020002;
     }
     public static final class id {
-        public static final int BTCancel=0x7f070016;
         public static final int BTDelete=0x7f07000d;
-        public static final int BTModify=0x7f070017;
+        public static final int BTModify=0x7f070016;
         public static final int BTValidate=0x7f070007;
-        public static final int IVLogo=0x7f070018;
+        public static final int IVLogo=0x7f070017;
         public static final int IVLogoDetails=0x7f070009;
         public static final int LVmdp=0x7f070008;
         public static final int TVDescription=0x7f07000b;
         public static final int TVMDP=0x7f07000c;
         public static final int TVTitre=0x7f07000a;
-        public static final int action_add=0x7f07001d;
-        public static final int action_modify=0x7f07001e;
-        public static final int action_settings=0x7f07001c;
+        public static final int action_add=0x7f07001c;
+        public static final int action_modify=0x7f07001d;
+        public static final int action_settings=0x7f07001b;
         public static final int appTVMod=0x7f07000e;
         public static final int checkBoSpec=0x7f070006;
         public static final int checkBoSpecMod=0x7f070015;
@@ -45,10 +44,10 @@ public final class R {
         public static final int checkBoxMinusculeMod=0x7f070013;
         public static final int checkBoxNumerique=0x7f070003;
         public static final int checkBoxNumeriqueMod=0x7f070012;
-        public static final int firstLine=0x7f07001b;
-        public static final int icon=0x7f070019;
+        public static final int firstLine=0x7f07001a;
+        public static final int icon=0x7f070018;
         public static final int passwordTVMod=0x7f07000f;
-        public static final int secondLine=0x7f07001a;
+        public static final int secondLine=0x7f070019;
         public static final int seekBarTV=0x7f070001;
         public static final int seekBarTVMod=0x7f070010;
         public static final int seekBarsize=0x7f070002;
