@@ -7,8 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import fr.beber.generatormdp.adapter.StableMDPAdapter;
-import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.adapter.StableAPPAdapter;
+import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
+import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
 
@@ -21,34 +22,37 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final MdpDAO mdpDAO = new MdpDAO(this);
-        mdpDAO.openOnlyRead();
-        final List<Mdp> mdpList = mdpDAO.getAll();
-        mdpDAO.close();
-
-        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,mdpList);
-        setListAdapter(stableMDPAdapter);
+        final StableAPPAdapter stableAPPAdapter = new StableAPPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,this.getAllApplication());
+        setListAdapter(stableAPPAdapter);
     }
 
     @Override
     protected void onListItemClick(final ListView listView, final View view, final int position, final long id) {
-        final Mdp mdp = (Mdp) getListAdapter().getItem(position);
+        final Application application = (Application) getListAdapter().getItem(position);
         final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
-        intent.putExtra(Constante.MDPID,String.valueOf(mdp.getId()));
+        intent.putExtra(Constante.APPID,String.valueOf(application.getId()));
         startActivity(intent);
+    }
+
+    /**
+     * Permet de récupérer la liste des applications.
+     * @return Liste d'application.
+     */
+    private List<Application> getAllApplication(){
+        final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
+        applicationDAO.openOnlyRead();
+        final List<Application> applicationList = applicationDAO.getAll();
+        applicationDAO.close();
+
+        return applicationList;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        final MdpDAO mdpDAO = new MdpDAO(this);
-        mdpDAO.openOnlyRead();
-        final List<Mdp> applicationList = mdpDAO.getAll();
-        mdpDAO.close();
-
-        final StableMDPAdapter stableMDPAdapter = new StableMDPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,applicationList);
-        setListAdapter(stableMDPAdapter);
+        final StableAPPAdapter stableAPPAdapter = new StableAPPAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,this.getAllApplication());
+        setListAdapter(stableAPPAdapter);
     }
 
     @Override

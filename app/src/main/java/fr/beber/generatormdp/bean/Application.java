@@ -29,6 +29,11 @@ public class Application {
     private String picture;
 
     /**
+     * Clé étrangère pour référencer l'application.
+     */
+    private Integer mdp;
+
+    /**
      * Permet d'obtenir l'identifiant d'une application.
      * @return L'identifiant.
      */
@@ -92,6 +97,22 @@ public class Application {
         this.picture = picture;
     }
 
+    /**
+     * Permet d'obtenir l'identifiant du mot de passe.
+     * @return L'identifiant du mot de passe.
+     */
+    public Integer getMdp() {
+        return mdp;
+    }
+
+    /**
+     * Permet de changer l'identifiant du mot de passe de l'application.
+     * @param mdp Mot de passe.
+     */
+    public void setMdp(Integer mdp) {
+        this.mdp = mdp;
+    }
+
     public Application() {
 
     }
@@ -107,6 +128,7 @@ public class Application {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (picture != null ? !picture.equals(that.picture) : that.picture != null) return false;
+        if (mdp != null ? !mdp.equals(that.mdp) : that.mdp != null) return false;
 
         return true;
     }
@@ -117,6 +139,7 @@ public class Application {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (mdp != null ? mdp.hashCode() : 0);
         return result;
     }
 
@@ -127,6 +150,7 @@ public class Application {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", picture='" + picture + '\'' +
+                ", mdp='" + mdp + '\'' +
                 ']';
     }
 }

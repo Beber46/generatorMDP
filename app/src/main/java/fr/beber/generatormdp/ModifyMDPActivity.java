@@ -11,6 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.GenerateMDP;
@@ -33,15 +34,14 @@ public class ModifyMDPActivity extends Activity {
             final Mdp mdp = new Mdp();
             mdp.setMdp(generateMDP.getPassWord());
             mdp.setLevel(generateMDP.getLevel());
-            mdp.setApp(mdpAct.getApp());
-            mdp.setId(mdpAct.getId());
+            mdp.setId(applicationAct.getId());
 
             final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
 
             final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
             mdpDAO.open();
             mdpDAO.update(mdp);
-            intent.putExtra(Constante.MDPID, String.valueOf(mdpAct.getId()));
+            intent.putExtra(Constante.APPID, String.valueOf(applicationAct.getId()));
             Log.d(getClass().getName(), mdp.toString());
             mdpDAO.close();
 
@@ -50,32 +50,33 @@ public class ModifyMDPActivity extends Activity {
         }
     };
     private TextView seekBadValue;
-    private Mdp mdpAct;
+    private Application applicationAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_mdp);
 
-        final String identifiant = getIntent().getStringExtra(Constante.MDPID);
+        final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null) {
+
+            final ApplicationDAO applicationDAO = new ApplicationDAO(this);
+            applicationDAO.openOnlyRead();
+            this.applicationAct = applicationDAO.getById(Integer.valueOf(identifiant));
+            applicationDAO.close();
+
+            setTitle(this.applicationAct.getName());
+
             final MdpDAO mdpDAO = new MdpDAO(this);
             mdpDAO.openOnlyRead();
-            Log.d(this.getClass().getName(), "identifiant : " + identifiant);
-            mdpAct = mdpDAO.getById(Integer.valueOf(identifiant));
+            final Mdp mdp = mdpDAO.getById(applicationAct.getId());
             mdpDAO.close();
 
             this.seekBadValue = (TextView) findViewById(R.id.seekBarTVMod);
             seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
 
-            final ApplicationDAO applicationDAO = new ApplicationDAO(this);
-            final TextView textViewApp = (TextView)findViewById(R.id.appTVMod);
-            applicationDAO.openOnlyRead();
-            textViewApp.setText(applicationDAO.getById(mdpAct.getApp()).getName());
-            applicationDAO.close();
-
             final TextView textViewPassword = (TextView)findViewById(R.id.passwordTVMod);
-            textViewPassword.setText(mdpAct.getMdp());
+            textViewPassword.setText(mdp.getMdp());
 
             final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBarsizeMod);
             seekBar.setMax(32);
@@ -101,8 +102,8 @@ public class ModifyMDPActivity extends Activity {
                         seekBadValue.setText(String.valueOf(progress));
                 }
             });
-            seekBar.setProgress(mdpAct.getMdp().length());
-            seekBadValue.setText(String.valueOf(mdpAct.getMdp().length()));
+            seekBar.setProgress(mdp.getMdp().length());
+            seekBadValue.setText(String.valueOf(mdp.getMdp().length()));
 
             final CheckBox checkBoxNumeric = (CheckBox) findViewById(R.id.checkBoxNumeriqueMod);
             isNumeric = checkBoxNumeric.isChecked();

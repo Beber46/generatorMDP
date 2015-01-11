@@ -19,11 +19,6 @@ public class Mdp {
     private String mdp;
 
     /**
-     * Clé étrangère pour référencer l'application.
-     */
-    private Integer app;
-
-    /**
      * Clé étrangère pour référencer le niveau.
      */
     private Integer level;
@@ -65,22 +60,6 @@ public class Mdp {
     }
 
     /**
-     * Permet d'obtenir l'identifiant d'une application.
-     * @return L'identifiant d'une application.
-     */
-    public Integer getApp() {
-        return app;
-    }
-
-    /**
-     * Permet de changer l'identifiant d'une application.
-     * @param app Identifiant de l'application.
-     */
-    public void setApp(final Integer app) {
-        this.app = app;
-    }
-
-    /**
      * Permet d'obtenir l'identifiant d'un level.
      * @return L'identifiant d'un level.
      */
@@ -107,7 +86,6 @@ public class Mdp {
 
         Mdp mdp = (Mdp) o;
 
-        if (app != null ? !app.equals(mdp.app) : mdp.app != null) return false;
         if (id != null ? !id.equals(mdp.id) : mdp.id != null) return false;
         if (level != null ? !level.equals(mdp.level) : mdp.level != null) return false;
         if (mdp != null ? !mdp.equals(mdp.mdp) : mdp.mdp != null) return false;
@@ -119,7 +97,6 @@ public class Mdp {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (mdp != null ? mdp.hashCode() : 0);
-        result = 31 * result + (app != null ? app.hashCode() : 0);
         result = 31 * result + (level != null ? level.hashCode() : 0);
         return result;
     }
@@ -129,7 +106,6 @@ public class Mdp {
         return "Mdp[" +
                 "id=" + id +
                 ", mdp='" + mdp + '\'' +
-                ", app=" + app +
                 ", level=" + level +
                 ']';
     }

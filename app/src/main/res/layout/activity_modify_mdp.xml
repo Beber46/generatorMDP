@@ -17,13 +17,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Application"
-                android:id="@+id/appTVMod"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Mot de passe"
                 android:id="@+id/passwordTVMod"/>
 

@@ -15,15 +15,6 @@
             android:src="@drawable/logo"
             android:layout_alignParentTop="true"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Titre"
-            android:id="@+id/TVTitre"
-            android:layout_alignTop="@+id/IVLogoDetails"
-            android:layout_toRightOf="@+id/IVLogoDetails"
-            android:layout_marginLeft="64dp"/>
 
     <TextView
             android:layout_width="wrap_content"

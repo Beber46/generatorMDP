@@ -3,6 +3,8 @@ package fr.beber.generatormdp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,12 +12,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import fr.beber.generatormdp.adapter.SpinApplicationAdapter;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.GenerateMDP;
@@ -28,32 +33,49 @@ public class AddMDPActivity extends Activity {
     private Boolean isMajuscule = Boolean.FALSE;
     private Boolean isSpecial = Boolean.FALSE;
     private TextView seekBadValue;
-    private Integer appId;
     private final View.OnClickListener onClickListenerValidate = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            final GenerateMDP generateMDP = new GenerateMDP(getApplicationContext(),isNumeric,isMinuscule,isMajuscule,isSpecial,Integer.valueOf(String.valueOf(seekBadValue.getText())));
+            final String nomAppli = applicationName.getText().toString();
 
-            Log.d(getClass().getName(),generateMDP.toString());
+            if(!nomAppli.isEmpty()) {
 
-            final Mdp mdp = new Mdp();
-            mdp.setMdp(generateMDP.getPassWord());
-            mdp.setLevel(generateMDP.getLevel());
-            mdp.setApp(appId);
+                final GenerateMDP generateMDP = new GenerateMDP(getApplicationContext(), isNumeric, isMinuscule, isMajuscule, isSpecial, Integer.valueOf(String.valueOf(seekBadValue.getText())));
 
-            final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
+                Log.d(getClass().getName(), generateMDP.toString());
 
-            final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
-            mdpDAO.open();
-            intent.putExtra(Constante.MDPID, String.valueOf(mdpDAO.save(mdp)));
-            mdpDAO.close();
+                final Mdp mdp = new Mdp();
+                mdp.setMdp(generateMDP.getPassWord());
+                mdp.setLevel(generateMDP.getLevel());
 
-            startActivity(intent);
-            finish();
+                final Intent intent = new Intent(getApplicationContext(), MDPDetailsActivity.class);
+
+                final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
+                mdpDAO.open();
+                final Integer mdpID = (int) mdpDAO.save(mdp);
+                mdpDAO.close();
+
+                final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
+                applicationDAO.open();
+                final Application application = new Application();
+                application.setName(nomAppli);
+                application.setDescription(applicationDes.getText().toString());
+                application.setMdp(mdpID);
+
+                intent.putExtra(Constante.APPID, String.valueOf(applicationDAO.save(application)));
+                applicationDAO.close();
+
+
+                startActivity(intent);
+                finish();
+            }else
+                Toast.makeText(getApplicationContext(), "L'application doit au moins comporter un nom!", Toast.LENGTH_LONG).show();
         }
     };
-    private SpinApplicationAdapter adapterListApplication;
+
+    private EditText applicationName;
+    private EditText applicationDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +85,8 @@ public class AddMDPActivity extends Activity {
         this.seekBadValue = (TextView)findViewById(R.id.seekBarTV);
         seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
 
-        final ApplicationDAO applicationDAO = new ApplicationDAO(this);
-        applicationDAO.openOnlyRead();
-        adapterListApplication = new SpinApplicationAdapter(this,  android.R.layout.simple_spinner_item, applicationDAO.getAll());
-        applicationDAO.close();
-
-        final Spinner spinnerApplication = (Spinner)findViewById(R.id.spinApplication);
-        spinnerApplication.setAdapter(adapterListApplication);
-
-        spinnerApplication.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                appId = adapterListApplication.getItem(position).getId();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        applicationName = (EditText)findViewById(R.id.applicationNameET);
+        applicationDes = (EditText)findViewById(R.id.applicationDescriptifET);
 
         final SeekBar seekBar = (SeekBar)findViewById(R.id.seekBarsize);
         seekBar.setMax(32);

@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import fr.beber.generatormdp.R;
-import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.LevelDAO;
+import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 
 import java.util.HashMap;
@@ -20,18 +21,18 @@ import java.util.List;
  * @author Bertrand
  * @version 1.0
  */
-public class StableMDPAdapter extends ArrayAdapter<Mdp> {
+public class StableAPPAdapter extends ArrayAdapter<Application> {
 
-    final HashMap<Mdp, Integer> mIdMap = new HashMap<Mdp, Integer>();
-    final List<Mdp> mdpList;
+    final HashMap<Application, Integer> mIdApplication = new HashMap<Application, Integer>();
+    final List<Application> applicationList;
     private final Context context;
 
-    public StableMDPAdapter(final Context context, final int textViewResourceId, final List<Mdp> mdpList) {
-        super(context, textViewResourceId, mdpList);
+    public StableAPPAdapter(final Context context, final int textViewResourceId, final List<Application> applicationList) {
+        super(context, textViewResourceId, applicationList);
         this.context = context;
-        this.mdpList = mdpList;
-        for (int i = 0; i < mdpList.size(); ++i) {
-            mIdMap.put(mdpList.get(i), mdpList.get(i).getId());
+        this.applicationList = applicationList;
+        for (int i = 0; i < applicationList.size(); ++i) {
+            mIdApplication.put(applicationList.get(i), applicationList.get(i).getId());
         }
     }
 
@@ -42,21 +43,23 @@ public class StableMDPAdapter extends ArrayAdapter<Mdp> {
         final TextView textViewFirst = (TextView) rowView.findViewById(R.id.firstLine);
         final TextView textViewSecond = (TextView) rowView.findViewById(R.id.secondLine);
 
-        final ApplicationDAO applicationDAO = new ApplicationDAO(this.context);
-        applicationDAO.openOnlyRead();
-        textViewFirst.setText(applicationDAO.getById(mdpList.get(position).getApp()).getName());
-        applicationDAO.close();
+        textViewFirst.setText(applicationList.get(position).getName());
+
+        final MdpDAO mdpDAO = new MdpDAO(this.context);
+        mdpDAO.openOnlyRead();
+        final Mdp mdp = mdpDAO.getById(applicationList.get(position).getId());
+        mdpDAO.close();
 
         final LevelDAO levelDAO = new LevelDAO(this.context);
         levelDAO.openOnlyRead();
-        textViewSecond.setText(levelDAO.getById(mdpList.get(position).getLevel()).getName());
+        textViewSecond.setText(levelDAO.getById(mdp.getLevel()).getName());
         levelDAO.close();
 
         return rowView;
     }
 
     @Override
-    public Mdp getItem(int position) {
+    public Application getItem(int position) {
         return super.getItem(position);
     }
 }

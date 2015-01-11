@@ -18,35 +18,33 @@ import fr.beber.generatormdp.util.Constante;
 
 public class MDPDetailsActivity extends Activity {
 
-    private Mdp mdp;
+    private Application application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mdpdetails);
 
-        final String identifiant = getIntent().getStringExtra(Constante.MDPID);
+        final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null){
-            final MdpDAO mdpDAO = new MdpDAO(this);
-            mdpDAO.openOnlyRead();
-            Log.d(this.getClass().getName(), "identifiant : " + identifiant);
-            this.mdp = mdpDAO.getById(Integer.valueOf(identifiant));
-            mdpDAO.close();
 
             final ApplicationDAO applicationDAO = new ApplicationDAO(this);
             applicationDAO.openOnlyRead();
-            final Application application = applicationDAO.getById(this.mdp.getApp());
+            this.application = applicationDAO.getById(Integer.valueOf(identifiant));
             applicationDAO.close();
 
-            final TextView textViewTitre = (TextView) findViewById(R.id.TVTitre);
-            textViewTitre.setText(application.getName());
+            final MdpDAO mdpDAO = new MdpDAO(this);
+            mdpDAO.openOnlyRead();
+            final Mdp mdp = mdpDAO.getById(application.getId());
+            mdpDAO.close();
+
+            setTitle(this.application.getName());
 
             final TextView textViewDescripion = (TextView) findViewById(R.id.TVDescription);
             textViewDescripion.setText(application.getDescription());
 
             final TextView textViewMdp = (TextView) findViewById(R.id.TVMDP);
-            textViewMdp.setText(this.mdp.getMdp());
-
+            textViewMdp.setText(mdp.getMdp());
 
             final Button buttonDelete = (Button)findViewById(R.id.BTDelete);
             buttonDelete.setOnClickListener(new View.OnClickListener() {
@@ -54,10 +52,10 @@ public class MDPDetailsActivity extends Activity {
                 public void onClick(View view) {
                     final Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 
-                    final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
-                    mdpDAO.open();
-                    mdpDAO.delete(mdp.getId());
-                    mdpDAO.close();
+                    final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
+                    applicationDAO.open();
+                    applicationDAO.delete(application.getId());
+                    applicationDAO.close();
 
                     startActivity(intent);
                     finish();
@@ -81,14 +79,18 @@ public class MDPDetailsActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_modify) {
-            final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);
-            intent.putExtra(Constante.MDPID,String.valueOf(mdp.getId()));
-            startActivity(intent);
-            finish();
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_modify:
+                final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);
+                intent.putExtra(Constante.APPID,String.valueOf(application.getId()));
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

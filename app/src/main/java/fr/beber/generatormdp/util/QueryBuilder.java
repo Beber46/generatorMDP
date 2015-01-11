@@ -95,7 +95,7 @@ public class QueryBuilder {
         }
 
         if(this.orderBy.length()>0)
-            retour = retour + " ORDERBY " + this.orderBy;
+            retour = retour + " ORDER BY " + this.orderBy;
 
         return retour;
     }

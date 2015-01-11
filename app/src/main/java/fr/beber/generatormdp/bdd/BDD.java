@@ -20,6 +20,7 @@ public class BDD extends SQLiteOpenHelper {
     public static final String LEVEL_COLUMN_NAME = "NAME";
     public static final int LEVEL_NUM_NAME = 1;
     public static final String LEVEL_COLUMN_COLOR = "COLOR";
+    public static final int LEVEL_NUM_COLOR = 2;
     /**
      * Permet de construire la requête pour créer la table <code>LEVEL</code>.
      */
@@ -27,9 +28,29 @@ public class BDD extends SQLiteOpenHelper {
             "(" + LEVEL_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + LEVEL_COLUMN_COLOR + " TEXT NOT NULL, "
             + LEVEL_COLUMN_NAME + " TEXT NOT NULL); ";
-    public static final int LEVEL_NUM_COLOR = 2;
+
+
     /**
-     * **************************** Création de la table de level
+     * **************************** Création de la table de Mot de passe
+     */
+    public static final String TN_MDP = "MDP";
+    public static final String MDP_COLUMN_ID = "_id";
+    public static final int MDP_NUM_ID = 0;
+    public static final String MDP_COLUMN_MDP = "MDP";
+    public static final int MDP_NUM_MDP = 1;
+    public static final String MDP_COLUMN_LEVEL = "LEVEL";
+    public static final int MDP_NUM_LEVEL = 2;
+    /**
+     * Permet de construire la requête pour créer la table <code>MDP</code>.
+     */
+    private static final String REQUETE_CREATION_MDP = "CREATE TABLE " + TN_MDP + " " +
+            "(" + MDP_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + MDP_COLUMN_LEVEL + " INTEGER NOT NULL, "
+            + MDP_COLUMN_MDP + " TEXT NOT NULL,"
+            + " FOREIGN KEY (" + MDP_COLUMN_LEVEL + ") REFERENCES " + TN_LEVEL + " (" + LEVEL_COLUMN_ID + "));";
+
+    /**
+     * **************************** Création de la table de application
      */
     public static final String TN_APP = "APP";
     public static final String APP_COLUMN_ID = "_id";
@@ -39,6 +60,10 @@ public class BDD extends SQLiteOpenHelper {
     public static final String APP_COLUMN_DES = "DESCRIPTION";
     public static final int APP_NUM_DES = 2;
     public static final String APP_COLUMN_PIC = "PICTURE";
+    public static final int APP_NUM_PIC = 3;
+    public static final String APP_COLUMN_MDP = "MDP";
+    public static final int APP_NUM_MDP = 4;
+
     /**
      * Permet de construire la requête pour créer la table <code>APP</code>.
      */
@@ -46,30 +71,9 @@ public class BDD extends SQLiteOpenHelper {
             "(" + APP_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + APP_COLUMN_NAME + " TEXT NOT NULL, "
             + APP_COLUMN_DES + " TEXT, "
-            + APP_COLUMN_PIC + " TEXT); ";
-    public static final int APP_NUM_PIC = 3;
-    /**
-     * **************************** Création de la table de Mot de passe
-     */
-    public static final String TN_MDP = "MDP";
-    public static final String MDP_COLUMN_ID = "_id";
-    public static final int MDP_NUM_ID = 0;
-    public static final String MDP_COLUMN_MDP = "MDP";
-    public static final int MDP_NUM_MDP = 1;
-    public static final String MDP_COLUMN_APP = "APP";
-    public static final int MDP_NUM_APP = 2;
-    public static final String MDP_COLUMN_LEVEL = "LEVEL";
-    /**
-     * Permet de construire la requête pour créer la table <code>MDP</code>.
-     */
-    private static final String REQUETE_CREATION_MDP = "CREATE TABLE " + TN_MDP + " " +
-            "(" + MDP_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + MDP_COLUMN_APP + " INTEGER NOT NULL, "
-            + MDP_COLUMN_LEVEL + " INTEGER NOT NULL, "
-            + MDP_COLUMN_MDP + " TEXT NOT NULL,"
-            + " FOREIGN KEY (" + MDP_COLUMN_LEVEL + ") REFERENCES " + TN_LEVEL + " (" + LEVEL_COLUMN_ID + "),"
-            + " FOREIGN KEY (" + MDP_COLUMN_APP + ") REFERENCES " + TN_APP + " (" + APP_COLUMN_ID + "));";
-    public static final int MDP_NUM_LEVEL = 3;
+            + APP_COLUMN_PIC + " TEXT,"
+            + APP_COLUMN_MDP + " INTEGER NOT NULL, "
+            + " FOREIGN KEY (" + APP_COLUMN_MDP + ") REFERENCES " + TN_MDP + " (" + MDP_COLUMN_ID + "));";
     /**
      * Version de la base de données
      */
@@ -118,8 +122,8 @@ public class BDD extends SQLiteOpenHelper {
         if (newVersion > DATABASE_VERSION) {
             Log.w(BDD.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_LEVEL + ";");
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_APP + ";");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_MDP + ";");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_APP + ";");
             this.onCreate(sqLiteDatabase);
         }
     }
@@ -128,8 +132,8 @@ public class BDD extends SQLiteOpenHelper {
     public void dropALL(){
         final SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_LEVEL + ";");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_APP + ";");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_MDP + ";");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TN_APP + ";");
         this.onCreate(sqLiteDatabase);
         sqLiteDatabase.close();
     }

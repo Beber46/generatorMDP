@@ -69,23 +69,6 @@ public class WelcomeActivity extends Activity {
         final BDD bdd = new BDD(context);
         bdd.dropALL();
 
-        final ApplicationDAO applicationDAO = new ApplicationDAO(context);
-        final Application application = new Application();
-        application.setName("Google +");
-        application.setDescription("Réseau social de Google.");
-
-        applicationDAO.open();
-        applicationDAO.save(application);
-        applicationDAO.close();
-
-        final Application application1 = new Application();
-        application1.setName("Facebook");
-        application1.setDescription("Réseau social de Facebook.");
-
-        applicationDAO.open();
-        applicationDAO.save(application1);
-        applicationDAO.close();
-
         final LevelDAO levelDAO = new LevelDAO(context);
         levelDAO.open();
         final Level level = new Level();
@@ -115,18 +98,47 @@ public class WelcomeActivity extends Activity {
         Log.d(getClass().getName(),level2.toString());
 
         final MdpDAO mdpDAO = new MdpDAO(context);
-        final Mdp mdp = new Mdp();
+        Mdp mdp = new Mdp();
         mdp.setMdp("TEST");
         levelDAO.openOnlyRead();
         mdp.setLevel(levelDAO.getAll().get(0).getId());
         levelDAO.close();
 
-        applicationDAO.openOnlyRead();
-        mdp.setApp(applicationDAO.getAll().get(0).getId());
-        applicationDAO.close();
+        mdpDAO.open();
+        mdpDAO.save(mdp);
+        mdpDAO.close();
+
+        mdp = new Mdp();
+        mdp.setMdp("TEST2");
+        levelDAO.openOnlyRead();
+        mdp.setLevel(levelDAO.getAll().get(1).getId());
+        levelDAO.close();
 
         mdpDAO.open();
         mdpDAO.save(mdp);
         mdpDAO.close();
+
+        final ApplicationDAO applicationDAO = new ApplicationDAO(context);
+        final Application application = new Application();
+        application.setName("Google +");
+        application.setDescription("Réseau social de Google.");
+        mdpDAO.open();
+        application.setMdp(mdpDAO.getAll().get(0).getId());
+        mdpDAO.close();
+
+        applicationDAO.open();
+        applicationDAO.save(application);
+        applicationDAO.close();
+
+        final Application application1 = new Application();
+        application1.setName("Facebook");
+        application1.setDescription("Réseau social de Facebook.");
+        mdpDAO.open();
+        application1.setMdp(mdpDAO.getAll().get(0).getId());
+        mdpDAO.close();
+
+        applicationDAO.open();
+        applicationDAO.save(application1);
+        applicationDAO.close();
     }
 }

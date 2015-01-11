@@ -8,6 +8,7 @@ import android.util.Log;
 import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.Repository;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.util.QueryBuilder;
 
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class MdpDAO extends Repository<Mdp> {
     private static final String[] mColumn = new String[]{
             BDD.MDP_COLUMN_ID,
             BDD.MDP_COLUMN_MDP,
-            BDD.MDP_COLUMN_APP,
             BDD.MDP_COLUMN_LEVEL
     };
 
@@ -53,7 +53,10 @@ public class MdpDAO extends Repository<Mdp> {
     @Override
     public List<Mdp> getAll() {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_MDP, mColumn, null, null, null, null, null);
+        final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
+        queryBuilder.addTable(BDD.TN_MDP);
+
+        final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToListObject(cursor);
@@ -65,7 +68,12 @@ public class MdpDAO extends Repository<Mdp> {
     @Override
     public Mdp getById(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_MDP, mColumn, mColumn[0] + "=?", new String[]{id.toString()}, null, null, null);
+
+        final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
+        queryBuilder.addTable(BDD.TN_MDP);
+        queryBuilder.addConstraint(""+mColumn[0]+" = ?",String.valueOf(id));
+
+        final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToOneObject(cursor);
@@ -80,8 +88,7 @@ public class MdpDAO extends Repository<Mdp> {
         final ContentValues contentValues = new ContentValues();
 
         contentValues.put(mColumn[1], mdp.getMdp());
-        contentValues.put(mColumn[2], mdp.getApp());
-        contentValues.put(mColumn[3], mdp.getLevel());
+        contentValues.put(mColumn[2], mdp.getLevel());
 
         return mBDD.insert(BDD.TN_MDP, null, contentValues);
     }
@@ -95,8 +102,7 @@ public class MdpDAO extends Repository<Mdp> {
         final ContentValues contentValues = new ContentValues();
 
         contentValues.put(mColumn[1], mdp.getMdp());
-        contentValues.put(mColumn[2], mdp.getApp());
-        contentValues.put(mColumn[3], mdp.getLevel());
+        contentValues.put(mColumn[2], mdp.getLevel());
 
         mBDD.update(BDD.TN_MDP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(mdp.getId())});
         Log.d(this.getClass().getName(), "Sortie");
@@ -120,9 +126,25 @@ public class MdpDAO extends Repository<Mdp> {
         final Mdp mdp = new Mdp();
         mdp.setId(cursor.getInt(BDD.MDP_NUM_ID));
         mdp.setMdp(cursor.getString(BDD.MDP_NUM_MDP));
-        mdp.setApp(cursor.getInt(BDD.MDP_NUM_APP));
         mdp.setLevel(cursor.getInt(BDD.MDP_NUM_LEVEL));
 
         return mdp;
+    }
+
+    /**
+     * Retourne tous les champs de table en un seul string, util pour les selects.
+     * @return la selection.
+     */
+    private String getAllParams(){
+        String retour = "";
+
+        for(int i = 0; i<mColumn.length;i++){
+            retour = retour + mColumn[i];
+
+            if(i!=(mColumn.length-1))
+                retour = retour + ", ";
+        }
+
+        return retour;
     }
 }

@@ -8,7 +8,7 @@ package fr.beber.generatormdp.util;
  */
 public class Constante {
 
-    public static final String MDPID = "mdpid";
+    public static final String APPID = "appid";
     public static final int MIN_VALUE = 4;
 
 }

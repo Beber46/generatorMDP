@@ -27,7 +27,8 @@ public class ApplicationDAO extends Repository<Application> {
             BDD.APP_COLUMN_ID,
             BDD.APP_COLUMN_NAME,
             BDD.APP_COLUMN_DES,
-            BDD.APP_COLUMN_PIC
+            BDD.APP_COLUMN_PIC,
+            BDD.APP_COLUMN_MDP
     };
 
 
@@ -50,15 +51,28 @@ public class ApplicationDAO extends Repository<Application> {
     }
 
     /**
-     * {@inheritDoc}
+     * Permet de récupérer la liste des {@link Application} par name croissants.
+     *
+     * @return La liste de {@link Application} trouvée.
      */
     @Override
     public List<Application> getAll() {
+       return this.getAll(true);
+    }
+
+    /**
+     * Permet de récupérer la liste des {@link Application}.
+     *
+     * @param orderBy <code>TRUE</code> si order by par nom d'application
+     * @return La liste de {@link Application} trouvée.
+     */
+    public List<Application> getAll(boolean orderBy) {
         Log.d(this.getClass().getName(), "Entree");
 
         final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
         queryBuilder.addTable(BDD.TN_APP);
-        queryBuilder.setOrderBy(mColumn[1]);
+        if(orderBy)
+            queryBuilder.setOrderBy(mColumn[1]);
 
         final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
 
@@ -94,6 +108,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[1], application.getName());
         contentValues.put(mColumn[2], application.getDescription()!=null?application.getDescription():"");
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
+        contentValues.put(mColumn[4], application.getMdp());
 
         return mBDD.insert(BDD.TN_APP, null, contentValues);
     }
@@ -109,6 +124,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[1], application.getName());
         contentValues.put(mColumn[2], application.getDescription()!=null?application.getDescription():"");
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
+        contentValues.put(mColumn[4], application.getMdp());
 
         mBDD.update(BDD.TN_APP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
         Log.d(this.getClass().getName(), "Sortie");
@@ -136,6 +152,7 @@ public class ApplicationDAO extends Repository<Application> {
         application.setDescription(description.length()>0?description:null);
         final String picture = cursor.getString(BDD.APP_NUM_PIC);
         application.setPicture(picture.length()>0?picture:null);
+        application.setMdp(cursor.getInt(BDD.APP_NUM_MDP));
 
         return application;
     }
