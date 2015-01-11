@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/C:/Users/Bertrand/AndroidstudioProjects/generatorMDP/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">5dp</dimen>
+    <dimen name="activity_vertical_margin">5dp</dimen>
+    <dimen name="linear_padding_addactivity">20dp</dimen>
+    <dimen name="relative_marginh_mdpdetails">15dp</dimen>
+    <dimen name="relative_marginv_mdpdetails">15dp</dimen>
     <!-- From: file:/C:/Users/Bertrand/AndroidstudioProjects/generatorMDP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">WelcomeActivity</string>
+    <string name="action_add">Ajouter</string>
+    <string name="action_modify">Modifier</string>
+    <string name="action_settings">Options</string>
+    <string name="app_name">GeneratorMDP</string>
+    <string name="application_prompt">Application</string>
+    <string name="button_cancel">Annuler</string>
+    <string name="button_delete">Supprimer</string>
+    <string name="button_modify">Modifier</string>
+    <string name="button_validate">Valider</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="textview_majuscule">Majuscule</string>
+    <string name="textview_minuscule">Minuscule</string>
+    <string name="textview_numeric">Numérique</string>
+    <string name="textview_size">Taille :</string>
+    <string name="textview_special">Caractères spécieaux</string>
+    <string name="title_activity_add_mdp">AddMDPActivity</string>
+    <string name="title_activity_main">MDP</string>
+    <string name="title_activity_mdpdetails">MDPDetailsActivity</string>
+    <string name="title_activity_modify_mdp">ModifyMDPActivity</string>
 </resources>
