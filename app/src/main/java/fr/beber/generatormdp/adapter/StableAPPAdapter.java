@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import fr.beber.generatormdp.R;
 import fr.beber.generatormdp.bdd.dao.LevelDAO;
@@ -42,6 +43,7 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
         final View rowView = inflater.inflate(R.layout.adapter_mdp, parent, false);
         final TextView textViewFirst = (TextView) rowView.findViewById(R.id.firstLine);
         final TextView textViewSecond = (TextView) rowView.findViewById(R.id.secondLine);
+        final ImageView imageViewShield = (ImageView) rowView.findViewById(R.id.IVShield);
 
         textViewFirst.setText(applicationList.get(position).getName());
 
@@ -54,6 +56,20 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
         levelDAO.openOnlyRead();
         textViewSecond.setText(levelDAO.getById(mdp.getLevel()).getName());
         levelDAO.close();
+
+        switch (mdp.getLevel()){
+            case 1:
+                imageViewShield.setImageResource(R.drawable.shieldred);
+                break;
+            case 2:
+                imageViewShield.setImageResource(R.drawable.shieldyellow);
+                break;
+            case 3:
+                imageViewShield.setImageResource(R.drawable.shieldgreen);
+                break;
+            default:
+                imageViewShield.setImageResource(R.drawable.shieldred);
+        }
 
         return rowView;
     }

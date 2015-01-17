@@ -39,4 +39,12 @@
             android:text="Titre MDP"
             android:textSize="16sp" />
 
+    <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/IVShield"
+            android:src="@drawable/shieldred"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/secondLine"/>
+
 </RelativeLayout>

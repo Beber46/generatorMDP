@@ -20,7 +20,10 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int logo=0x7f020001;
-        public static final int welcome=0x7f020002;
+        public static final int shieldgreen=0x7f020002;
+        public static final int shieldred=0x7f020003;
+        public static final int shieldyellow=0x7f020004;
+        public static final int welcome=0x7f020005;
     }
     public static final class id {
         public static final int BTDelete=0x7f07000c;
@@ -28,13 +31,14 @@ public final class R {
         public static final int BTValidate=0x7f070008;
         public static final int IVLogo=0x7f070017;
         public static final int IVLogoDetails=0x7f07000a;
+        public static final int IVShield=0x7f07001b;
         public static final int LVmdp=0x7f070009;
         public static final int TVDerniereModif=0x7f07000e;
         public static final int TVDescription=0x7f07000b;
         public static final int TVMDP=0x7f07000d;
-        public static final int action_add=0x7f07001c;
-        public static final int action_modify=0x7f07001d;
-        public static final int action_settings=0x7f07001b;
+        public static final int action_add=0x7f07001d;
+        public static final int action_modify=0x7f07001e;
+        public static final int action_settings=0x7f07001c;
         public static final int applicationDescriptifET=0x7f070001;
         public static final int applicationNameET=0x7f070000;
         public static final int checkBoSpec=0x7f070007;
