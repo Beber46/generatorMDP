@@ -82,16 +82,18 @@ public final class R {
         public static final int button_delete=0x7f050006;
         public static final int button_modify=0x7f050007;
         public static final int button_validate=0x7f050008;
-        public static final int hello_world=0x7f050009;
-        public static final int textview_date_modif=0x7f05000a;
-        public static final int textview_majuscule=0x7f05000b;
-        public static final int textview_minuscule=0x7f05000c;
-        public static final int textview_numeric=0x7f05000d;
-        public static final int textview_size=0x7f05000e;
-        public static final int textview_special=0x7f05000f;
-        public static final int title_activity_add_mdp=0x7f050010;
-        public static final int title_activity_main=0x7f050011;
-        public static final int title_activity_mdpdetails=0x7f050012;
-        public static final int title_activity_modify_mdp=0x7f050013;
+        public static final int edittext_application=0x7f050009;
+        public static final int edittext_description=0x7f05000a;
+        public static final int hello_world=0x7f05000b;
+        public static final int textview_date_modif=0x7f05000c;
+        public static final int textview_majuscule=0x7f05000d;
+        public static final int textview_minuscule=0x7f05000e;
+        public static final int textview_numeric=0x7f05000f;
+        public static final int textview_size=0x7f050010;
+        public static final int textview_special=0x7f050011;
+        public static final int title_activity_add_mdp=0x7f050012;
+        public static final int title_activity_main=0x7f050013;
+        public static final int title_activity_mdpdetails=0x7f050014;
+        public static final int title_activity_modify_mdp=0x7f050015;
     }
 }
