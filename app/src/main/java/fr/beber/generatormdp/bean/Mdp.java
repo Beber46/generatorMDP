@@ -1,5 +1,7 @@
 package fr.beber.generatormdp.bean;
 
+import java.util.Calendar;
+
 /**
  * Cette classe permet de définir le bean MDP.
  *
@@ -22,6 +24,15 @@ public class Mdp {
      * Clé étrangère pour référencer le niveau.
      */
     private Integer level;
+
+    /**
+     * Date de création du mot de passe.
+     */
+    private Calendar dateModify;
+
+    public Mdp() {
+
+    }
 
     /**
      * Permet d'obtenir l'identifiant d'un mdp.
@@ -75,8 +86,20 @@ public class Mdp {
         this.level = level;
     }
 
-    public Mdp() {
+    /**
+     * Permet d'obtenir la date de création.
+     * @return La date de création.
+     */
+    public Calendar getDateModify() {
+        return dateModify;
+    }
 
+    /**
+     * Permet de changer la date de création.
+     * @param dateModify Date de création.
+     */
+    public void setDateModify(final Calendar dateModify) {
+        this.dateModify = dateModify;
     }
 
     @Override
@@ -88,6 +111,7 @@ public class Mdp {
 
         if (id != null ? !id.equals(mdp.id) : mdp.id != null) return false;
         if (level != null ? !level.equals(mdp.level) : mdp.level != null) return false;
+        if (dateModify != null ? !dateModify.equals(mdp.dateModify) : mdp.dateModify != null) return false;
         if (mdp != null ? !mdp.equals(mdp.mdp) : mdp.mdp != null) return false;
 
         return true;
@@ -98,6 +122,7 @@ public class Mdp {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (mdp != null ? mdp.hashCode() : 0);
         result = 31 * result + (level != null ? level.hashCode() : 0);
+        result = 31 * result + (dateModify != null ? dateModify.hashCode() : 0);
         return result;
     }
 
@@ -107,6 +132,7 @@ public class Mdp {
                 "id=" + id +
                 ", mdp='" + mdp + '\'' +
                 ", level=" + level +
+                ", dateModify=" + dateModify +
                 ']';
     }
 }

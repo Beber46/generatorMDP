@@ -23,35 +23,36 @@ public final class R {
         public static final int welcome=0x7f020002;
     }
     public static final class id {
-        public static final int BTDelete=0x7f07000d;
-        public static final int BTModify=0x7f070015;
+        public static final int BTDelete=0x7f07000c;
+        public static final int BTModify=0x7f070016;
         public static final int BTValidate=0x7f070008;
-        public static final int IVLogo=0x7f070016;
+        public static final int IVLogo=0x7f070017;
         public static final int IVLogoDetails=0x7f07000a;
         public static final int LVmdp=0x7f070009;
+        public static final int TVDerniereModif=0x7f07000e;
         public static final int TVDescription=0x7f07000b;
-        public static final int TVMDP=0x7f07000c;
-        public static final int action_add=0x7f07001b;
-        public static final int action_modify=0x7f07001c;
-        public static final int action_settings=0x7f07001a;
+        public static final int TVMDP=0x7f07000d;
+        public static final int action_add=0x7f07001c;
+        public static final int action_modify=0x7f07001d;
+        public static final int action_settings=0x7f07001b;
         public static final int applicationDescriptifET=0x7f070001;
         public static final int applicationNameET=0x7f070000;
         public static final int checkBoSpec=0x7f070007;
-        public static final int checkBoSpecMod=0x7f070014;
+        public static final int checkBoSpecMod=0x7f070015;
         public static final int checkBoxMajuscule=0x7f070006;
-        public static final int checkBoxMajusculeMod=0x7f070013;
+        public static final int checkBoxMajusculeMod=0x7f070014;
         public static final int checkBoxMinuscule=0x7f070005;
-        public static final int checkBoxMinusculeMod=0x7f070012;
+        public static final int checkBoxMinusculeMod=0x7f070013;
         public static final int checkBoxNumerique=0x7f070004;
-        public static final int checkBoxNumeriqueMod=0x7f070011;
-        public static final int firstLine=0x7f070019;
-        public static final int icon=0x7f070017;
-        public static final int passwordTVMod=0x7f07000e;
-        public static final int secondLine=0x7f070018;
+        public static final int checkBoxNumeriqueMod=0x7f070012;
+        public static final int firstLine=0x7f07001a;
+        public static final int icon=0x7f070018;
+        public static final int passwordTVMod=0x7f07000f;
+        public static final int secondLine=0x7f070019;
         public static final int seekBarTV=0x7f070002;
-        public static final int seekBarTVMod=0x7f07000f;
+        public static final int seekBarTVMod=0x7f070010;
         public static final int seekBarsize=0x7f070003;
-        public static final int seekBarsizeMod=0x7f070010;
+        public static final int seekBarsizeMod=0x7f070011;
     }
     public static final class layout {
         public static final int activity_add_mdp=0x7f030000;
@@ -78,14 +79,15 @@ public final class R {
         public static final int button_modify=0x7f050007;
         public static final int button_validate=0x7f050008;
         public static final int hello_world=0x7f050009;
-        public static final int textview_majuscule=0x7f05000a;
-        public static final int textview_minuscule=0x7f05000b;
-        public static final int textview_numeric=0x7f05000c;
-        public static final int textview_size=0x7f05000d;
-        public static final int textview_special=0x7f05000e;
-        public static final int title_activity_add_mdp=0x7f05000f;
-        public static final int title_activity_main=0x7f050010;
-        public static final int title_activity_mdpdetails=0x7f050011;
-        public static final int title_activity_modify_mdp=0x7f050012;
+        public static final int textview_date_modif=0x7f05000a;
+        public static final int textview_majuscule=0x7f05000b;
+        public static final int textview_minuscule=0x7f05000c;
+        public static final int textview_numeric=0x7f05000d;
+        public static final int textview_size=0x7f05000e;
+        public static final int textview_special=0x7f05000f;
+        public static final int title_activity_add_mdp=0x7f050010;
+        public static final int title_activity_main=0x7f050011;
+        public static final int title_activity_mdpdetails=0x7f050012;
+        public static final int title_activity_modify_mdp=0x7f050013;
     }
 }

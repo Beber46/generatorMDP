@@ -3,7 +3,6 @@ package fr.beber.generatormdp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +13,7 @@ import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
+import fr.beber.generatormdp.util.DateFormat;
 
 
 public class MDPDetailsActivity extends Activity {
@@ -45,6 +45,9 @@ public class MDPDetailsActivity extends Activity {
 
             final TextView textViewMdp = (TextView) findViewById(R.id.TVMDP);
             textViewMdp.setText(mdp.getMdp());
+
+            final TextView textViewDateDebut = (TextView) findViewById(R.id.TVDerniereModif);
+            textViewDateDebut.setText(getResources().getString(R.string.textview_date_modif)+" "+DateFormat.getCalendarFormat(mdp.getDateModify(),"dd-MM-yyyy"));
 
             final Button buttonDelete = (Button)findViewById(R.id.BTDelete);
             buttonDelete.setOnClickListener(new View.OnClickListener() {

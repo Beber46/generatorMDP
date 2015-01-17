@@ -10,6 +10,7 @@ import fr.beber.generatormdp.bdd.Repository;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.QueryBuilder;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -26,7 +27,8 @@ public class MdpDAO extends Repository<Mdp> {
     private static final String[] mColumn = new String[]{
             BDD.MDP_COLUMN_ID,
             BDD.MDP_COLUMN_MDP,
-            BDD.MDP_COLUMN_LEVEL
+            BDD.MDP_COLUMN_LEVEL,
+            BDD.MDP_COLUMN_DATEDEBUT
     };
 
     /**
@@ -89,6 +91,7 @@ public class MdpDAO extends Repository<Mdp> {
 
         contentValues.put(mColumn[1], mdp.getMdp());
         contentValues.put(mColumn[2], mdp.getLevel());
+        contentValues.put(mColumn[3], Calendar.getInstance().getTimeInMillis());
 
         return mBDD.insert(BDD.TN_MDP, null, contentValues);
     }
@@ -103,6 +106,7 @@ public class MdpDAO extends Repository<Mdp> {
 
         contentValues.put(mColumn[1], mdp.getMdp());
         contentValues.put(mColumn[2], mdp.getLevel());
+        contentValues.put(mColumn[3], mdp.getDateModify().getTimeInMillis());
 
         mBDD.update(BDD.TN_MDP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(mdp.getId())});
         Log.d(this.getClass().getName(), "Sortie");
@@ -127,6 +131,9 @@ public class MdpDAO extends Repository<Mdp> {
         mdp.setId(cursor.getInt(BDD.MDP_NUM_ID));
         mdp.setMdp(cursor.getString(BDD.MDP_NUM_MDP));
         mdp.setLevel(cursor.getInt(BDD.MDP_NUM_LEVEL));
+        final Calendar dateModify = Calendar.getInstance();
+        dateModify.setTimeInMillis(cursor.getLong(BDD.MDP_NUM_DATEDEBUT));
+        mdp.setDateModify(dateModify);
 
         return mdp;
     }

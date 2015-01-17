@@ -20,7 +20,6 @@ public class BDD extends SQLiteOpenHelper {
     public static final String LEVEL_COLUMN_NAME = "NAME";
     public static final int LEVEL_NUM_NAME = 1;
     public static final String LEVEL_COLUMN_COLOR = "COLOR";
-    public static final int LEVEL_NUM_COLOR = 2;
     /**
      * Permet de construire la requête pour créer la table <code>LEVEL</code>.
      */
@@ -28,8 +27,7 @@ public class BDD extends SQLiteOpenHelper {
             "(" + LEVEL_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + LEVEL_COLUMN_COLOR + " TEXT NOT NULL, "
             + LEVEL_COLUMN_NAME + " TEXT NOT NULL); ";
-
-
+    public static final int LEVEL_NUM_COLOR = 2;
     /**
      * **************************** Création de la table de Mot de passe
      */
@@ -40,6 +38,7 @@ public class BDD extends SQLiteOpenHelper {
     public static final int MDP_NUM_MDP = 1;
     public static final String MDP_COLUMN_LEVEL = "LEVEL";
     public static final int MDP_NUM_LEVEL = 2;
+    public static final String MDP_COLUMN_DATEDEBUT = "DATEDEBUT";
     /**
      * Permet de construire la requête pour créer la table <code>MDP</code>.
      */
@@ -47,8 +46,9 @@ public class BDD extends SQLiteOpenHelper {
             "(" + MDP_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + MDP_COLUMN_LEVEL + " INTEGER NOT NULL, "
             + MDP_COLUMN_MDP + " TEXT NOT NULL,"
+            + MDP_COLUMN_DATEDEBUT + " INTEGER NOT NULL,"
             + " FOREIGN KEY (" + MDP_COLUMN_LEVEL + ") REFERENCES " + TN_LEVEL + " (" + LEVEL_COLUMN_ID + "));";
-
+    public static final int MDP_NUM_DATEDEBUT = 3;
     /**
      * **************************** Création de la table de application
      */
@@ -62,8 +62,6 @@ public class BDD extends SQLiteOpenHelper {
     public static final String APP_COLUMN_PIC = "PICTURE";
     public static final int APP_NUM_PIC = 3;
     public static final String APP_COLUMN_MDP = "MDP";
-    public static final int APP_NUM_MDP = 4;
-
     /**
      * Permet de construire la requête pour créer la table <code>APP</code>.
      */
@@ -74,6 +72,7 @@ public class BDD extends SQLiteOpenHelper {
             + APP_COLUMN_PIC + " TEXT,"
             + APP_COLUMN_MDP + " INTEGER NOT NULL, "
             + " FOREIGN KEY (" + APP_COLUMN_MDP + ") REFERENCES " + TN_MDP + " (" + MDP_COLUMN_ID + "));";
+    public static final int APP_NUM_MDP = 4;
     /**
      * Version de la base de données
      */
