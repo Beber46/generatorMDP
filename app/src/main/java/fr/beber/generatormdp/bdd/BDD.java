@@ -39,6 +39,14 @@ public class BDD extends SQLiteOpenHelper {
     public static final String MDP_COLUMN_LEVEL = "LEVEL";
     public static final int MDP_NUM_LEVEL = 2;
     public static final String MDP_COLUMN_DATEDEBUT = "DATEDEBUT";
+    public static final int MDP_NUM_DATEDEBUT = 3;
+    public static final String MDP_COLUMN_NUM = "NUM";
+    public static final int MDP_NUM_NUM = 4;
+    public static final String MDP_COLUMN_MIN = "MIN";
+    public static final int MDP_NUM_MIN = 5;
+    public static final String MDP_COLUMN_MAJ = "MAJ";
+    public static final int MDP_NUM_MAJ = 6;
+    public static final String MDP_COLUMN_SPEC = "SPEC";
     /**
      * Permet de construire la requête pour créer la table <code>MDP</code>.
      */
@@ -47,8 +55,12 @@ public class BDD extends SQLiteOpenHelper {
             + MDP_COLUMN_LEVEL + " INTEGER NOT NULL, "
             + MDP_COLUMN_MDP + " TEXT NOT NULL,"
             + MDP_COLUMN_DATEDEBUT + " INTEGER NOT NULL,"
+            + MDP_COLUMN_NUM + " INTEGER NOT NULL,"
+            + MDP_COLUMN_MIN + " INTEGER NOT NULL,"
+            + MDP_COLUMN_MAJ + " INTEGER NOT NULL,"
+            + MDP_COLUMN_SPEC + " INTEGER NOT NULL,"
             + " FOREIGN KEY (" + MDP_COLUMN_LEVEL + ") REFERENCES " + TN_LEVEL + " (" + LEVEL_COLUMN_ID + "));";
-    public static final int MDP_NUM_DATEDEBUT = 3;
+    public static final int MDP_NUM_SPEC = 7;
     /**
      * **************************** Création de la table de application
      */

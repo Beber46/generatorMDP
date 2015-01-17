@@ -1,5 +1,7 @@
 package fr.beber.generatormdp.bean;
 
+import fr.beber.generatormdp.util.DateFormat;
+
 import java.util.Calendar;
 
 /**
@@ -29,6 +31,26 @@ public class Mdp {
      * Date de création du mot de passe.
      */
     private Calendar dateModify;
+
+    /**
+     * Vérifie si le mot de passe comporte des nombres.
+     */
+    private Boolean isNumeric = Boolean.FALSE;
+
+    /**
+     * Vérifie si le mot de passe comporte des minuscules.
+     */
+    private Boolean isMin = Boolean.FALSE;
+
+    /**
+     * Vérifie si le mot de passe comporte des majuscules.
+     */
+    private Boolean isMaj = Boolean.FALSE;
+
+    /**
+     * Vérifie si le mot de passe comporte des caractères spéciaux.
+     */
+    private Boolean isSpec = Boolean.FALSE;
 
     public Mdp() {
 
@@ -102,17 +124,65 @@ public class Mdp {
         this.dateModify = dateModify;
     }
 
+    /**
+     * @return <code>TRUE</code> si numérique.
+     */
+    public Boolean getIsNumeric() {
+        return isNumeric;
+    }
+
+    public void setIsNumeric(Boolean isNumeric) {
+        this.isNumeric = isNumeric;
+    }
+
+    /**
+     * @return <code>TRUE</code> si minuscule.
+     */
+    public Boolean getIsMin() {
+        return isMin;
+    }
+
+    public void setIsMin(Boolean isMin) {
+        this.isMin = isMin;
+    }
+
+    /**
+     * @return <code>TRUE</code> si majuscule.
+     */
+    public Boolean getIsMaj() {
+        return isMaj;
+    }
+
+    public void setIsMaj(Boolean isMaj) {
+        this.isMaj = isMaj;
+    }
+
+    /**
+     * @return <code>TRUE</code> si spécial.
+     */
+    public Boolean getIsSpec() {
+        return isSpec;
+    }
+
+    public void setIsSpec(Boolean isSpec) {
+        this.isSpec = isSpec;
+    }
+
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Mdp mdp = (Mdp) o;
+        Mdp mdp1 = (Mdp) o;
 
-        if (id != null ? !id.equals(mdp.id) : mdp.id != null) return false;
-        if (level != null ? !level.equals(mdp.level) : mdp.level != null) return false;
-        if (dateModify != null ? !dateModify.equals(mdp.dateModify) : mdp.dateModify != null) return false;
-        if (mdp != null ? !mdp.equals(mdp.mdp) : mdp.mdp != null) return false;
+        if (dateModify != null ? !dateModify.equals(mdp1.dateModify) : mdp1.dateModify != null) return false;
+        if (id != null ? !id.equals(mdp1.id) : mdp1.id != null) return false;
+        if (isMaj != null ? !isMaj.equals(mdp1.isMaj) : mdp1.isMaj != null) return false;
+        if (isMin != null ? !isMin.equals(mdp1.isMin) : mdp1.isMin != null) return false;
+        if (isNumeric != null ? !isNumeric.equals(mdp1.isNumeric) : mdp1.isNumeric != null) return false;
+        if (isSpec != null ? !isSpec.equals(mdp1.isSpec) : mdp1.isSpec != null) return false;
+        if (level != null ? !level.equals(mdp1.level) : mdp1.level != null) return false;
+        if (mdp != null ? !mdp.equals(mdp1.mdp) : mdp1.mdp != null) return false;
 
         return true;
     }
@@ -123,6 +193,10 @@ public class Mdp {
         result = 31 * result + (mdp != null ? mdp.hashCode() : 0);
         result = 31 * result + (level != null ? level.hashCode() : 0);
         result = 31 * result + (dateModify != null ? dateModify.hashCode() : 0);
+        result = 31 * result + (isNumeric != null ? isNumeric.hashCode() : 0);
+        result = 31 * result + (isMin != null ? isMin.hashCode() : 0);
+        result = 31 * result + (isMaj != null ? isMaj.hashCode() : 0);
+        result = 31 * result + (isSpec != null ? isSpec.hashCode() : 0);
         return result;
     }
 
@@ -132,7 +206,11 @@ public class Mdp {
                 "id=" + id +
                 ", mdp='" + mdp + '\'' +
                 ", level=" + level +
-                ", dateModify=" + dateModify +
+                ", dateModify=" + DateFormat.getCalendarFormat(dateModify,"dd-MM-yyyy H:m:s") +
+                ", isNumeric=" + isNumeric +
+                ", isMin=" + isMin +
+                ", isMaj=" + isMaj +
+                ", isSpec=" + isSpec +
                 ']';
     }
 }

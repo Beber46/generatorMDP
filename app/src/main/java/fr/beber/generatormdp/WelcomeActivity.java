@@ -102,6 +102,7 @@ public class WelcomeActivity extends Activity {
         mdp.setMdp("TEST");
         levelDAO.openOnlyRead();
         mdp.setLevel(levelDAO.getAll().get(0).getId());
+        mdp.setIsMaj(Boolean.TRUE);
         levelDAO.close();
 
         mdpDAO.open();
@@ -112,6 +113,7 @@ public class WelcomeActivity extends Activity {
         mdp.setMdp("TEST2");
         levelDAO.openOnlyRead();
         mdp.setLevel(levelDAO.getAll().get(1).getId());
+        mdp.setIsMaj(Boolean.TRUE);
         levelDAO.close();
 
         mdpDAO.open();

@@ -52,5 +52,6 @@
             android:text="@string/textview_date_modif"
             android:id="@+id/TVDerniereModif"
             android:layout_above="@+id/BTDelete"
+            android:textStyle="italic"
             android:layout_alignParentLeft="true"/>
 </RelativeLayout>

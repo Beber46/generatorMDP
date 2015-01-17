@@ -28,7 +28,11 @@ public class MdpDAO extends Repository<Mdp> {
             BDD.MDP_COLUMN_ID,
             BDD.MDP_COLUMN_MDP,
             BDD.MDP_COLUMN_LEVEL,
-            BDD.MDP_COLUMN_DATEDEBUT
+            BDD.MDP_COLUMN_DATEDEBUT,
+            BDD.MDP_COLUMN_NUM,
+            BDD.MDP_COLUMN_MIN,
+            BDD.MDP_COLUMN_MAJ,
+            BDD.MDP_COLUMN_SPEC
     };
 
     /**
@@ -87,11 +91,7 @@ public class MdpDAO extends Repository<Mdp> {
     @Override
     public long save(final Mdp mdp) {
         Log.d(this.getClass().getName(), "Entree");
-        final ContentValues contentValues = new ContentValues();
-
-        contentValues.put(mColumn[1], mdp.getMdp());
-        contentValues.put(mColumn[2], mdp.getLevel());
-        contentValues.put(mColumn[3], Calendar.getInstance().getTimeInMillis());
+        final ContentValues contentValues = this.getContentValues(mdp);
 
         return mBDD.insert(BDD.TN_MDP, null, contentValues);
     }
@@ -102,11 +102,7 @@ public class MdpDAO extends Repository<Mdp> {
     @Override
     public void update(final Mdp mdp) {
         Log.d(this.getClass().getName(), "Entree");
-        final ContentValues contentValues = new ContentValues();
-
-        contentValues.put(mColumn[1], mdp.getMdp());
-        contentValues.put(mColumn[2], mdp.getLevel());
-        contentValues.put(mColumn[3], mdp.getDateModify().getTimeInMillis());
+        final ContentValues contentValues = this.getContentValues(mdp);
 
         mBDD.update(BDD.TN_MDP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(mdp.getId())});
         Log.d(this.getClass().getName(), "Sortie");
@@ -134,6 +130,10 @@ public class MdpDAO extends Repository<Mdp> {
         final Calendar dateModify = Calendar.getInstance();
         dateModify.setTimeInMillis(cursor.getLong(BDD.MDP_NUM_DATEDEBUT));
         mdp.setDateModify(dateModify);
+        mdp.setIsNumeric((cursor.getInt(BDD.MDP_NUM_NUM) == 1) ? Boolean.TRUE : Boolean.FALSE);
+        mdp.setIsMin((cursor.getInt(BDD.MDP_NUM_MIN) == 1) ? Boolean.TRUE : Boolean.FALSE);
+        mdp.setIsMaj((cursor.getInt(BDD.MDP_NUM_MAJ) == 1) ? Boolean.TRUE : Boolean.FALSE);
+        mdp.setIsSpec((cursor.getInt(BDD.MDP_NUM_SPEC) == 1) ? Boolean.TRUE : Boolean.FALSE);
 
         return mdp;
     }
@@ -153,5 +153,23 @@ public class MdpDAO extends Repository<Mdp> {
         }
 
         return retour;
+    }
+
+    /**
+     * Permet de créer un ContentValues.
+     * @param mdp Le mot de passe.
+     * @return ContentValues créé.
+     */
+    private ContentValues getContentValues(final Mdp mdp){
+        final ContentValues contentValues = new ContentValues();
+        contentValues.put(mColumn[1], mdp.getMdp());
+        contentValues.put(mColumn[2], mdp.getLevel());
+        contentValues.put(mColumn[3], Calendar.getInstance().getTimeInMillis());
+        contentValues.put(mColumn[4], (mdp.getIsNumeric().booleanValue())? 1 : 0);
+        contentValues.put(mColumn[5], (mdp.getIsMin().booleanValue())? 1 : 0);
+        contentValues.put(mColumn[6], (mdp.getIsMaj().booleanValue())? 1 : 0);
+        contentValues.put(mColumn[7], (mdp.getIsSpec().booleanValue())? 1 : 0);
+
+        return contentValues;
     }
 }

@@ -3,21 +3,16 @@ package fr.beber.generatormdp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import fr.beber.generatormdp.adapter.SpinApplicationAdapter;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
@@ -32,7 +27,6 @@ public class AddMDPActivity extends Activity {
     private Boolean isMinuscule = Boolean.TRUE;
     private Boolean isMajuscule = Boolean.FALSE;
     private Boolean isSpecial = Boolean.FALSE;
-    private TextView seekBadValue;
     private final View.OnClickListener onClickListenerValidate = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -73,7 +67,7 @@ public class AddMDPActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "L'application doit au moins comporter un nom!", Toast.LENGTH_LONG).show();
         }
     };
-
+    private TextView seekBadValue;
     private EditText applicationName;
     private EditText applicationDes;
 
@@ -81,6 +75,8 @@ public class AddMDPActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mdp);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.seekBadValue = (TextView)findViewById(R.id.seekBarTV);
         seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
@@ -158,16 +154,13 @@ public class AddMDPActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

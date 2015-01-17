@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,14 +32,19 @@ public class ModifyMDPActivity extends Activity {
 
             Log.d(getClass().getName(), generateMDP.toString());
 
-            final Mdp mdp = new Mdp();
+            final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
+            mdpDAO.openOnlyRead();
+            final Mdp mdp = mdpDAO.getById(applicationAct.getId());
+            mdpDAO.close();
             mdp.setMdp(generateMDP.getPassWord());
             mdp.setLevel(generateMDP.getLevel());
-            mdp.setId(applicationAct.getId());
+            mdp.setIsMaj(isMajuscule);
+            mdp.setIsMin(isMinuscule);
+            mdp.setIsNumeric(isNumeric);
+            mdp.setIsSpec(isSpecial);
 
             final Intent intent = new Intent(getApplicationContext(),MDPDetailsActivity.class);
 
-            final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
             mdpDAO.open();
             mdpDAO.update(mdp);
             intent.putExtra(Constante.APPID, String.valueOf(applicationAct.getId()));
@@ -57,6 +63,8 @@ public class ModifyMDPActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_mdp);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null) {
 
@@ -71,6 +79,8 @@ public class ModifyMDPActivity extends Activity {
             mdpDAO.openOnlyRead();
             final Mdp mdp = mdpDAO.getById(applicationAct.getId());
             mdpDAO.close();
+
+            Log.d(getClass().getName(),"mdp : "+mdp.toString());
 
             this.seekBadValue = (TextView) findViewById(R.id.seekBarTVMod);
             seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
@@ -106,6 +116,7 @@ public class ModifyMDPActivity extends Activity {
             seekBadValue.setText(String.valueOf(mdp.getMdp().length()));
 
             final CheckBox checkBoxNumeric = (CheckBox) findViewById(R.id.checkBoxNumeriqueMod);
+            checkBoxNumeric.setChecked(mdp.getIsNumeric().booleanValue());
             isNumeric = checkBoxNumeric.isChecked();
             checkBoxNumeric.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,6 +126,7 @@ public class ModifyMDPActivity extends Activity {
             });
 
             final CheckBox checkBoxSpec = (CheckBox) findViewById(R.id.checkBoSpecMod);
+            checkBoxSpec.setChecked(mdp.getIsSpec().booleanValue());
             isSpecial = checkBoxSpec.isChecked();
             checkBoxSpec.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,6 +136,7 @@ public class ModifyMDPActivity extends Activity {
             });
 
             final CheckBox checkBoxMin = (CheckBox) findViewById(R.id.checkBoxMinusculeMod);
+            checkBoxMin.setChecked(mdp.getIsMin().booleanValue());
             isMinuscule = checkBoxMin.isChecked();
             checkBoxMin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,6 +146,7 @@ public class ModifyMDPActivity extends Activity {
             });
 
             final CheckBox checkBoxMaj = (CheckBox) findViewById(R.id.checkBoxMajusculeMod);
+            checkBoxMaj.setChecked(mdp.getIsMaj().booleanValue());
             isMajuscule = checkBoxMaj.isChecked();
             checkBoxMaj.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,4 +159,20 @@ public class ModifyMDPActivity extends Activity {
             buttonModify.setOnClickListener(this.onClickListenerModify);
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

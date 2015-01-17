@@ -25,6 +25,8 @@ public class MDPDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mdpdetails);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null){
 
@@ -77,14 +79,10 @@ public class MDPDetailsActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 return true;
             case R.id.action_modify:
                 final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);

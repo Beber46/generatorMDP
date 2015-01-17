@@ -13,7 +13,7 @@
     <string name="textview_numeric">Numérique</string>
     <string name="textview_majuscule">Majuscule</string>
     <string name="textview_minuscule">Minuscule</string>
-    <string name="textview_special">Caractères spécieaux</string>
+    <string name="textview_special">Caractères spéciaux</string>
     <string name="textview_date_modif">Dernière Modificaiton:</string>
     <string name="button_delete">Supprimer</string>
     <string name="button_validate">Valider</string>
