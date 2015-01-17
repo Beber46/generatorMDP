@@ -35,34 +35,42 @@ public class AddMDPActivity extends Activity {
 
             if(!nomAppli.isEmpty()) {
 
-                final GenerateMDP generateMDP = new GenerateMDP(getApplicationContext(), isNumeric, isMinuscule, isMajuscule, isSpecial, Integer.valueOf(String.valueOf(seekBadValue.getText())));
+                if(isMajuscule || isMinuscule || isNumeric || isSpecial) {
 
-                Log.d(getClass().getName(), generateMDP.toString());
+                    final GenerateMDP generateMDP = new GenerateMDP(getApplicationContext(), isNumeric, isMinuscule, isMajuscule, isSpecial, Integer.valueOf(String.valueOf(seekBadValue.getText())));
 
-                final Mdp mdp = new Mdp();
-                mdp.setMdp(generateMDP.getPassWord());
-                mdp.setLevel(generateMDP.getLevel());
+                    Log.d(getClass().getName(), generateMDP.toString());
 
-                final Intent intent = new Intent(getApplicationContext(), MDPDetailsActivity.class);
+                    final Mdp mdp = new Mdp();
+                    mdp.setMdp(generateMDP.getPassWord());
+                    mdp.setLevel(generateMDP.getLevel());
+                    mdp.setIsMaj(isMajuscule);
+                    mdp.setIsMin(isMinuscule);
+                    mdp.setIsNumeric(isNumeric);
+                    mdp.setIsSpec(isSpecial);
 
-                final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
-                mdpDAO.open();
-                final Integer mdpID = (int) mdpDAO.save(mdp);
-                mdpDAO.close();
+                    final Intent intent = new Intent(getApplicationContext(), MDPDetailsActivity.class);
 
-                final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
-                applicationDAO.open();
-                final Application application = new Application();
-                application.setName(nomAppli);
-                application.setDescription(applicationDes.getText().toString());
-                application.setMdp(mdpID);
+                    final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
+                    mdpDAO.open();
+                    final Integer mdpID = (int) mdpDAO.save(mdp);
+                    mdpDAO.close();
 
-                intent.putExtra(Constante.APPID, String.valueOf(applicationDAO.save(application)));
-                applicationDAO.close();
+                    final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
+                    applicationDAO.open();
+                    final Application application = new Application();
+                    application.setName(nomAppli);
+                    application.setDescription(applicationDes.getText().toString());
+                    application.setMdp(mdpID);
+
+                    intent.putExtra(Constante.APPID, String.valueOf(applicationDAO.save(application)));
+                    applicationDAO.close();
 
 
-                startActivity(intent);
-                finish();
+                    startActivity(intent);
+                    finish();
+                }else
+                    Toast.makeText(getApplicationContext(), "L'application doit au moins comporter un type!", Toast.LENGTH_LONG).show();
             }else
                 Toast.makeText(getApplicationContext(), "L'application doit au moins comporter un nom!", Toast.LENGTH_LONG).show();
         }
