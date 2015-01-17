@@ -19,15 +19,21 @@ import fr.beber.generatormdp.bean.Mdp;
 import java.util.List;
 
 public class WelcomeActivity extends Activity {
+
+    private boolean click = true;
+
     /**
      * Permet de passer à l'activity suivante.
      */
     private View.OnClickListener clickListenerLogo = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(click) {
+                click=false;
+                final Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     };
 
