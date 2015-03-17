@@ -63,11 +63,6 @@ local.properties
 bin/
 gen/
 
-#gradle
-*gradle/
-*.gradle
-*.bat
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
