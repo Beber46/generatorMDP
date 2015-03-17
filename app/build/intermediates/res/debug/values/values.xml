@@ -18,12 +18,15 @@
     <string name="button_delete">Supprimer</string>
     <string name="button_modify">Modifier</string>
     <string name="button_validate">Valider</string>
+    <string name="edittext_application">Application</string>
+    <string name="edittext_description">Description de l\'application</string>
     <string name="hello_world">Hello world!</string>
+    <string name="textview_date_modif">Dernière Modificaiton:</string>
     <string name="textview_majuscule">Majuscule</string>
     <string name="textview_minuscule">Minuscule</string>
     <string name="textview_numeric">Numérique</string>
     <string name="textview_size">Taille :</string>
-    <string name="textview_special">Caractères spécieaux</string>
+    <string name="textview_special">Caractères spéciaux</string>
     <string name="title_activity_add_mdp">AddMDPActivity</string>
     <string name="title_activity_main">MDP</string>
     <string name="title_activity_mdpdetails">MDPDetailsActivity</string>
