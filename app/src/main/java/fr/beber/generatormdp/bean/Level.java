@@ -81,7 +81,7 @@ public class Level {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Level)) return false;
 
         Level level = (Level) o;
 
