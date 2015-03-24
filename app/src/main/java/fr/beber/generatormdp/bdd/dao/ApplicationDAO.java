@@ -3,10 +3,10 @@ package fr.beber.generatormdp.bdd.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.Repository;
+import fr.beber.generatormdp.bdd.table.TApplication;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.util.QueryBuilder;
 
@@ -24,11 +24,11 @@ public class ApplicationDAO extends Repository<Application> {
      * Champs en base de données de {@link fr.beber.generatormdp.bean.Application}
      */
     private static final String[] mColumn = new String[]{
-            BDD.APP_COLUMN_ID,
-            BDD.APP_COLUMN_NAME,
-            BDD.APP_COLUMN_DES,
-            BDD.APP_COLUMN_PIC,
-            BDD.APP_COLUMN_MDP
+            TApplication.APP_COLUMN_ID,
+            TApplication.APP_COLUMN_NAME,
+            TApplication.APP_COLUMN_DES,
+            TApplication.APP_COLUMN_PIC,
+            TApplication.APP_COLUMN_MDP
     };
 
 
@@ -39,15 +39,6 @@ public class ApplicationDAO extends Repository<Application> {
      */
     public ApplicationDAO(final Context context) {
         mSQLOH = new BDD(context);
-    }
-
-    /**
-     * Constructeur
-     *
-     * @param sqLiteOpenHelper Définit le sqLiteOpenHelper à utiliser.
-     */
-    public ApplicationDAO(final SQLiteOpenHelper sqLiteOpenHelper) {
-        mSQLOH = sqLiteOpenHelper;
     }
 
     /**
@@ -70,7 +61,7 @@ public class ApplicationDAO extends Repository<Application> {
         Log.d(this.getClass().getName(), "Entree");
 
         final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
-        queryBuilder.addTable(BDD.TN_APP);
+        queryBuilder.addTable(TApplication.TN_APP);
         if(orderBy)
             queryBuilder.setOrderBy(mColumn[1]);
 
@@ -88,7 +79,7 @@ public class ApplicationDAO extends Repository<Application> {
         Log.d(this.getClass().getName(), "Entree");
 
         final QueryBuilder queryBuilder = new QueryBuilder(this.getAllParams());
-        queryBuilder.addTable(BDD.TN_APP);
+        queryBuilder.addTable(TApplication.TN_APP);
         queryBuilder.addConstraint(""+mColumn[0]+" = ?",String.valueOf(id));
 
         final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
@@ -110,7 +101,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
         contentValues.put(mColumn[4], application.getMdp());
 
-        return mBDD.insert(BDD.TN_APP, null, contentValues);
+        return mBDD.insert(TApplication.TN_APP, null, contentValues);
     }
 
     /**
@@ -126,7 +117,7 @@ public class ApplicationDAO extends Repository<Application> {
         contentValues.put(mColumn[3], application.getPicture()!=null?application.getPicture():"");
         contentValues.put(mColumn[4], application.getMdp());
 
-        mBDD.update(BDD.TN_APP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
+        mBDD.update(TApplication.TN_APP, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(application.getId())});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -136,7 +127,7 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public void delete(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        mBDD.delete(BDD.TN_APP, mColumn[0] + "=?", new String[]{String.valueOf(id)});
+        mBDD.delete(TApplication.TN_APP, mColumn[0] + "=?", new String[]{String.valueOf(id)});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -146,13 +137,13 @@ public class ApplicationDAO extends Repository<Application> {
     @Override
     public Application convertCursorToObject(final Cursor cursor) {
         final Application application = new Application();
-        application.setId(cursor.getInt(BDD.APP_NUM_ID));
-        application.setName(cursor.getString(BDD.APP_NUM_NAME));
-        final String description = cursor.getString(BDD.APP_NUM_DES);
+        application.setId(cursor.getInt(TApplication.APP_NUM_ID));
+        application.setName(cursor.getString(TApplication.APP_NUM_NAME));
+        final String description = cursor.getString(TApplication.APP_NUM_DES);
         application.setDescription(description.length()>0?description:null);
-        final String picture = cursor.getString(BDD.APP_NUM_PIC);
+        final String picture = cursor.getString(TApplication.APP_NUM_PIC);
         application.setPicture(picture.length()>0?picture:null);
-        application.setMdp(cursor.getInt(BDD.APP_NUM_MDP));
+        application.setMdp(cursor.getInt(TApplication.APP_NUM_MDP));
 
         return application;
     }

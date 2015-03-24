@@ -3,10 +3,10 @@ package fr.beber.generatormdp.bdd.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.Repository;
+import fr.beber.generatormdp.bdd.table.TLevel;
 import fr.beber.generatormdp.bean.Level;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public class LevelDAO extends Repository<Level> {
      * Champs en base de données de {@link fr.beber.generatormdp.bean.Level}
      */
     private static final String[] mColumn = new String[]{
-            BDD.LEVEL_COLUMN_ID,
-            BDD.LEVEL_COLUMN_NAME,
-            BDD.LEVEL_COLUMN_COLOR
+            TLevel.LEVEL_COLUMN_ID,
+            TLevel.LEVEL_COLUMN_NAME,
+            TLevel.LEVEL_COLUMN_COLOR
     };
 
     /**
@@ -38,21 +38,12 @@ public class LevelDAO extends Repository<Level> {
     }
 
     /**
-     * Constructeur
-     *
-     * @param sqLiteOpenHelper Définit le sqLiteOpenHelper à utiliser.
-     */
-    public LevelDAO(final SQLiteOpenHelper sqLiteOpenHelper) {
-        mSQLOH = sqLiteOpenHelper;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public List<Level> getAll() {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.query(BDD.TN_LEVEL, mColumn, null, null, null, null, mColumn[0]);
+        final Cursor cursor = mBDD.query(TLevel.TN_LEVEL, mColumn, null, null, null, null, mColumn[0]);
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToListObject(cursor);
@@ -64,7 +55,7 @@ public class LevelDAO extends Repository<Level> {
     @Override
     public Level getById(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        final Cursor cursor = mBDD.rawQuery("SELECT "+this.getAllParams()+" FROM "+BDD.TN_LEVEL+" WHERE "+mColumn[0]+" = ?",new String[]{String.valueOf(id)});
+        final Cursor cursor = mBDD.rawQuery("SELECT "+this.getAllParams()+" FROM "+TLevel.TN_LEVEL+" WHERE "+mColumn[0]+" = ?",new String[]{String.valueOf(id)});
 
         Log.d(this.getClass().getName(), "Sortie");
         return convertCursorToOneObject(cursor);
@@ -81,7 +72,7 @@ public class LevelDAO extends Repository<Level> {
         contentValues.put(mColumn[1], level.getName());
         contentValues.put(mColumn[2], level.getColor());
 
-        return mBDD.insert(BDD.TN_LEVEL, null, contentValues);
+        return mBDD.insert(TLevel.TN_LEVEL, null, contentValues);
     }
 
     /**
@@ -95,7 +86,7 @@ public class LevelDAO extends Repository<Level> {
         contentValues.put(mColumn[1], level.getName());
         contentValues.put(mColumn[2], level.getColor());
 
-        mBDD.update(BDD.TN_LEVEL, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(level.getId())});
+        mBDD.update(TLevel.TN_LEVEL, contentValues, mColumn[0] + "=?", new String[]{String.valueOf(level.getId())});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -105,7 +96,7 @@ public class LevelDAO extends Repository<Level> {
     @Override
     public void delete(final Integer id) {
         Log.d(this.getClass().getName(), "Entree");
-        mBDD.delete(BDD.TN_LEVEL, mColumn[0] + "=?", new String[]{String.valueOf(id)});
+        mBDD.delete(TLevel.TN_LEVEL, mColumn[0] + "=?", new String[]{String.valueOf(id)});
         Log.d(this.getClass().getName(), "Sortie");
     }
 
@@ -115,9 +106,9 @@ public class LevelDAO extends Repository<Level> {
     @Override
     public Level convertCursorToObject(final Cursor cursor) {
         final Level level = new Level();
-        level.setId(cursor.getInt(BDD.LEVEL_NUM_ID));
-        level.setName(cursor.getString(BDD.LEVEL_NUM_NAME));
-        level.setColor(cursor.getString(BDD.LEVEL_NUM_COLOR));
+        level.setId(cursor.getInt(TLevel.LEVEL_NUM_ID));
+        level.setName(cursor.getString(TLevel.LEVEL_NUM_NAME));
+        level.setColor(cursor.getString(TLevel.LEVEL_NUM_COLOR));
 
         return level;
     }
