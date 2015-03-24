@@ -12,6 +12,7 @@ import fr.beber.generatormdp.bdd.dao.LevelDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.util.LetterTileProvider;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,7 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
         final View rowView = inflater.inflate(R.layout.adapter_mdp, parent, false);
         final TextView textViewFirst = (TextView) rowView.findViewById(R.id.firstLine);
         final TextView textViewSecond = (TextView) rowView.findViewById(R.id.secondLine);
-        final ImageView imageViewShield = (ImageView) rowView.findViewById(R.id.IVShield);
+        final ImageView iconImageView = (ImageView)rowView.findViewById(R.id.icon);
 
         textViewFirst.setText(applicationList.get(position).getName());
 
@@ -57,19 +58,8 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
         textViewSecond.setText(levelDAO.getById(mdp.getLevel()).getName());
         levelDAO.close();
 
-        switch (mdp.getLevel()){
-            case 1:
-                imageViewShield.setImageResource(R.drawable.shieldred);
-                break;
-            case 2:
-                imageViewShield.setImageResource(R.drawable.shieldyellow);
-                break;
-            case 3:
-                imageViewShield.setImageResource(R.drawable.shieldgreen);
-                break;
-            default:
-                imageViewShield.setImageResource(R.drawable.shieldred);
-        }
+        final LetterTileProvider letterTileProvider = new LetterTileProvider(context);
+        iconImageView.setImageBitmap(letterTileProvider.getLetterIcon(context, textViewFirst.getText().toString()));
 
         return rowView;
     }
