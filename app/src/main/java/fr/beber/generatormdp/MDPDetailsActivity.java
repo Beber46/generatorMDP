@@ -1,5 +1,6 @@
 package fr.beber.generatormdp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,9 @@ public class MDPDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mdpdetails);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        final ActionBar actionBar = getActionBar();
+        if(actionBar!=null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
         final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null){
@@ -55,14 +58,11 @@ public class MDPDetailsActivity extends Activity {
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-
                     final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
                     applicationDAO.open();
                     applicationDAO.delete(application.getId());
                     applicationDAO.close();
 
-                    startActivity(intent);
                     finish();
                 }
             });

@@ -10,7 +10,6 @@ import android.widget.ListView;
 import fr.beber.generatormdp.adapter.StableAPPAdapter;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bean.Application;
-import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
 
 import java.util.List;
