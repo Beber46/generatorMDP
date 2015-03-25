@@ -79,6 +79,7 @@ hs_err_pid*
 /bin/
 target/
 log/
+.gradle/
 # OS Files #
 .DS_Store
 *.class
