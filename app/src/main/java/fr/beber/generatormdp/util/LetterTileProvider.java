@@ -42,11 +42,6 @@ public class LetterTileProvider {
     private final Canvas mCanvas = new Canvas();
 
     /**
-     * La première lettre à utliser.
-     */
-    private final char[] mFirstChar = new char[1];
-
-    /**
      * Fond du titre.
      */
     private final TypedArray mColors;
@@ -115,17 +110,16 @@ public class LetterTileProvider {
      */
     public Bitmap getLetterTile(String displayName, String key, int width, int height) {
         final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        final char firstChar = displayName.charAt(0);
+        final char firstChar = Character.toUpperCase(displayName.charAt(0));
 
         final Canvas canvas = mCanvas;
         canvas.setBitmap(bitmap);
         canvas.drawColor(pickColor(key));
 
         if (isAlphabetLetterOrDigit(firstChar)) {
-            mFirstChar[0] = Character.toUpperCase(firstChar);
             mPaint.setTextSize(mTileLetterFontSize);
-            mPaint.getTextBounds(mFirstChar, 0, 1, mBounds);
-            canvas.drawText(mFirstChar, 0, 1, width / 2, height / 2
+            mPaint.getTextBounds(firstChar, 0, 1, mBounds);
+            canvas.drawText(firstChar, 0, 1, width / 2, height / 2
                     + (mBounds.bottom - mBounds.top) / 2, mPaint);
         } else
             canvas.drawBitmap(mDefaultBitmap, 0, 0, null);
