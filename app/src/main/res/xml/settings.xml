@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<preferencescreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <preferencecategory android:title="@string/pref_title_generale">
+        <checkboxpreference android:defaultvalue="false" android:key="prefKeyNotification"
+                            android:summary="@string/pref_summary_notification" android:title="@string/pref_title_notification"/>
+        <listpreference android:key="prefKeyLanguage" android:entries="@array/languages"
+                        android:dependency="prefKeyNotification"
+                        android:summary="@string/pref_summary_language"
+                        android:entryvalues="@array/languageValues" android:title="@string/pref_title_language">
+        </listpreference>
+    </preferencecategory>
+
+    <preferencecategory android:title="@string/pref_title_propos">
+        <Preference
+                android:key="prefKeyVersion"
+                android:summary="@string/pref_summary_version"
+                android:title="@string/pref_title_version" />
+        <Preference
+                android:key="prefKeyAuteur"
+                android:dependency="prefKeyVersion"
+                android:summary="@string/pref_summary_auteur"
+                android:title="@string/pref_title_auteur" />
+    </preferencecategory>
+
+    <preferencecategory android:title="@string/pref_title_import_export">
+        <Preference
+                android:key="prefKeyImport"
+                android:title="@string/pref_title_import" />
+        <Preference
+                android:key="prefKeyExport"
+                android:dependency="prefKeyImport"
+                android:summary="@string/pref_summary_export"
+                android:title="@string/pref_title_export" />
+    </preferencecategory>
+
+</preferencescreen>

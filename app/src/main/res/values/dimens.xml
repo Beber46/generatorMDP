@@ -7,4 +7,7 @@
     <dimen name="relative_marginv_mdpdetails">15dp</dimen>
 
     <dimen name="linear_padding_addactivity">20dp</dimen>
+
+    <dimen name="tile_letter_font_size">33sp</dimen>
+    <dimen name="letter_tile_size">64dp</dimen>
 </resources>

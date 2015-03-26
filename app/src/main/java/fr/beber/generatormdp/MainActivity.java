@@ -10,6 +10,7 @@ import android.widget.ListView;
 import fr.beber.generatormdp.adapter.StableAPPAdapter;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bean.Application;
+import fr.beber.generatormdp.settings.UserSettingActivity;
 import fr.beber.generatormdp.util.Constante;
 
 import java.util.List;
@@ -75,6 +76,8 @@ public class MainActivity extends ListActivity {
             return true;
         }
         else if (id == R.id.action_settings) {
+            final Intent intent = new Intent(getApplicationContext(),UserSettingActivity.class);
+            startActivityForResult(intent);
             return true;
         }
 
