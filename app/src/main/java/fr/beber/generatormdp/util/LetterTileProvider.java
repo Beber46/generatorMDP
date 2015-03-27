@@ -24,7 +24,7 @@ public class LetterTileProvider {
     /**
      * Nombre minimal de couleur dans le tableau.
      */
-    private static final int NUM_OF_TILE_COLORS = 8;
+    private static final int NUM_OF_TILE_COLORS = 21;
 
     /**
      * Le {@link TextPaint} utilisait pour dessiner la lettre pour l'icone.

@@ -72,13 +72,27 @@
 
 
     <array name="letter_tile_colors">
-        <item>#f16364</item>
-        <item>#f58559</item>
-        <item>#f9a43e</item>
-        <item>#e4c62e</item>
-        <item>#67bf74</item>
-        <item>#59a2be</item>
-        <item>#2093cd</item>
-        <item>#ad3f6f</item>
+        <item>#d06b64</item>
+        <item>#ac725e</item>
+        <item>#f83a22</item>
+        <item>#ff7537</item>
+        <item>#ffad46</item>
+        <item>#42d692</item>
+        <item>#16a765</item>
+        <item>#7bd148</item>
+        <item>#b3dc6c</item>
+        <item>#fbe983</item>
+        <item>#fad165</item>
+        <item>#92e1c0</item>
+        <item>#9fe1e7</item>
+        <item>#9fc6e7</item>
+        <item>#4986e7</item>
+        <item>#9a9cff</item>
+        <item>#b99aff</item>
+        <item>#cabdbf</item>
+        <item>#cca6ac</item>
+        <item>#f691b2</item>
+        <item>#cd74e6</item>
+        <item>#a47ae2</item>
     </array>
 </resources>
