@@ -2,6 +2,7 @@ package fr.beber.generatormdp.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import fr.beber.generatormdp.R;
 
 /**
  * @author BLafage

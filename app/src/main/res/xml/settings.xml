@@ -1,48 +1,42 @@
 <!--?xml version="1.0" encoding="utf-8"?-->
-<preferencescreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <preferencecategory android:title="@string/pref_title_generale">
-        <checkboxpreference android:defaultvalue="false" android:key="prefKeyNotification"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_title_generale">
+        
+        <CheckBoxPreference android:key="prefKeyNotification"
                             android:summary="@string/pref_summary_notification"
                             android:title="@string/pref_title_notification"/>
         <ListPreference
-                android:dependency="prefKeyNotification"
                 android:key="prefKeyDateLimit"
                 android:title="@string/pref_date_limit"
                 android:dialogTitle="@string/pref_date_limit_dialog"
                 android:entries="@array/dateLimits"
-                android:entryValues="@array/dateLimitValues"
-                android:defaultValue="4"/>
+                android:entryValues="@array/dateLimitValues"/>
 
-        <listpreference android:key="prefKeyLanguage" android:entries="@array/languages"
-                        android:dependency="prefKeyDateLimit"
-                        android:summary="@string/pref_summary_language"
-                        android:defaultValue="1"
-                        android:entryvalues="@array/languageValues" android:title="@string/pref_title_language">
-        </listpreference>
-    </preferencecategory>
+        <ListPreference android:key="prefKeyLanguage"
+                        android:entries="@array/languages"
+                        android:entryValues="@array/languageValues"
+                        android:summary="@string/pref_summary_language" android:title="@string/pref_title_language"/>
+    </PreferenceCategory>
 
-    <preferencecategory android:title="@string/pref_title_propos">
+    <PreferenceCategory android:title="@string/pref_title_import_export">
+        <Preference
+                android:key="prefKeyImport"
+                android:title="@string/pref_title_import"/>
+        <Preference
+                android:key="prefKeyExport"
+                android:summary="@string/pref_summary_export"
+                android:title="@string/pref_title_export"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title_propos">
         <Preference
                 android:key="prefKeyVersion"
                 android:summary="@string/pref_summary_version"
                 android:title="@string/pref_title_version"/>
         <Preference
                 android:key="prefKeyAuteur"
-                android:dependency="prefKeyVersion"
                 android:summary="@string/pref_summary_auteur"
                 android:title="@string/pref_title_auteur"/>
-    </preferencecategory>
+    </PreferenceCategory>
 
-    <preferencecategory android:title="@string/pref_title_import_export">
-        <Preference
-                android:key="prefKeyImport"
-                android:title="@string/pref_title_import"/>
-        <Preference
-                android:key="prefKeyExport"
-                android:dependency="prefKeyImport"
-                android:summary="@string/pref_summary_export"
-                android:title="@string/pref_title_export"/>
-    </preferencecategory>
-
-</preferencescreen>
+</PreferenceScreen>

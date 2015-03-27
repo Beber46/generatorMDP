@@ -27,6 +27,9 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
+            android:name=".settings.UserSettingActivity" >
+        </activity>
+        <activity
             android:name=".MDPDetailsActivity"
             android:label="" >
             <meta-data

@@ -18,6 +18,8 @@ import java.util.List;
 
 public class MainActivity extends ListActivity {
 
+    private static final int RESULT_SETTINGS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +79,7 @@ public class MainActivity extends ListActivity {
         }
         else if (id == R.id.action_settings) {
             final Intent intent = new Intent(getApplicationContext(),UserSettingActivity.class);
-            startActivityForResult(intent);
+            startActivityForResult(intent,RESULT_SETTINGS);
             return true;
         }
 
