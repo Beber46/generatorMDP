@@ -10,11 +10,13 @@
                 android:title="@string/pref_date_limit"
                 android:dialogTitle="@string/pref_date_limit_dialog"
                 android:entries="@array/dateLimits"
+                android:defaultValue="60"
                 android:entryValues="@array/dateLimitValues"/>
 
         <ListPreference android:key="prefKeyLanguage"
                         android:entries="@array/languages"
                         android:entryValues="@array/languageValues"
+                        android:defaultValue="1"
                         android:summary="@string/pref_summary_language" android:title="@string/pref_title_language"/>
     </PreferenceCategory>
 
