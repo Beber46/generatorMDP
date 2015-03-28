@@ -101,7 +101,19 @@ public class LetterTileProvider {
         final Resources res = context.getResources();
         final int tileSize = res.getDimensionPixelSize(R.dimen.letter_tile_size);
 
-        return this.getLetterTile(text, text, tileSize, tileSize);
+        return this.getLetterIcon(text, tileSize, tileSize);
+    }
+
+    /**
+     * Permet de récupérer la première lettre du texte à cha
+     *
+     * @param text    Le string sur lequel ce base la première lettre.
+     * @param width    Largeur de l'icon.
+     * @param height    Hauteur de l'icon.
+     * @return La première lettre en {@link Bitmap}.
+     */
+    public Bitmap getLetterIcon(final String text,final int width,final int height) {
+        return this.getLetterTile(text, text, width, height);
     }
 
     /**

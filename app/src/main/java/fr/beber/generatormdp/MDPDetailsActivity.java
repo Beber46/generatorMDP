@@ -3,11 +3,13 @@ package fr.beber.generatormdp;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
@@ -15,6 +17,7 @@ import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.DateFormat;
+import fr.beber.generatormdp.util.LetterTileProvider;
 
 
 public class MDPDetailsActivity extends Activity {
@@ -66,6 +69,11 @@ public class MDPDetailsActivity extends Activity {
                     finish();
                 }
             });
+
+            final Resources res = this.getResources();
+            final ImageView imageViewLetter = (ImageView)findViewById(R.id.IVLogoDetails);
+            final LetterTileProvider letterTileProvider = new LetterTileProvider(this);
+            imageViewLetter.setImageBitmap(letterTileProvider.getLetterIcon(this.application.getName(),res.getDimensionPixelSize(R.dimen.letter_tile_size_xx),res.getDimensionPixelSize(R.dimen.letter_tile_size_xx)));
         }
     }
 
