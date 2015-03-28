@@ -26,6 +26,8 @@
             android:name="fr.beber.generatormdp.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity android:name="fr.beber.generatormdp.settings.UserSettingActivity" >
+        </activity>
         <activity
             android:name="fr.beber.generatormdp.MDPDetailsActivity"
             android:label="" >

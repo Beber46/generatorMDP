@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/C:/Users/Bertrand/AndroidstudioProjects/generatorMDP/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="dateLimitValues">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+    </string-array>
+    <string-array name="dateLimits">
+        <item name="1">15 Jours</item>
+        <item name="2">30 Jours</item>
+        <item name="3">45 Jours</item>
+        <item name="4">60 Jours</item>
+        <item name="5">75 Jours</item>
+        <item name="6">90 Jours</item>
+    </string-array>
+    <string-array name="languageValues">
+        <item name="1">1</item>
+        <item name="2">2</item>
+        <item name="3">3</item>
+        <item name="4">4</item>
+    </string-array>
+    <string-array name="languages">
+        <item name="1">Par défaut</item>
+        <item name="2">English</item>
+        <item name="3">Francais</item>
+        <item name="4">Español</item>
+    </string-array>
+    <array name="letter_tile_colors">
+        <item>#d06b64</item>
+        <item>#ac725e</item>
+        <item>#f83a22</item>
+        <item>#ff7537</item>
+        <item>#ffad46</item>
+        <item>#42d692</item>
+        <item>#16a765</item>
+        <item>#7bd148</item>
+        <item>#b3dc6c</item>
+        <item>#fbe983</item>
+        <item>#fad165</item>
+        <item>#92e1c0</item>
+        <item>#9fe1e7</item>
+        <item>#9fc6e7</item>
+        <item>#4986e7</item>
+        <item>#9a9cff</item>
+        <item>#b99aff</item>
+        <item>#cabdbf</item>
+        <item>#cca6ac</item>
+        <item>#f691b2</item>
+        <item>#cd74e6</item>
+        <item>#a47ae2</item>
+    </array>
     <!-- From: file:/C:/Users/Bertrand/AndroidstudioProjects/generatorMDP/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">5dp</dimen>
     <dimen name="activity_vertical_margin">5dp</dimen>
+    <dimen name="letter_tile_size">64dp</dimen>
     <dimen name="linear_padding_addactivity">20dp</dimen>
     <dimen name="relative_marginh_mdpdetails">15dp</dimen>
     <dimen name="relative_marginv_mdpdetails">15dp</dimen>
+    <dimen name="tile_letter_font_size">33sp</dimen>
     <!-- From: file:/C:/Users/Bertrand/AndroidstudioProjects/generatorMDP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_add">Ajouter</string>
@@ -21,6 +77,25 @@
     <string name="edittext_application">Application</string>
     <string name="edittext_description">Description de l\'application</string>
     <string name="hello_world">Hello world!</string>
+    <string name="pref_date_limit">Limit expiration</string>
+    <string name="pref_date_limit_dialog">Temps d\'expiration</string>
+    <string name="pref_summary_auteur">Bertrand Lafage développeur indépendant</string>
+    <string name="pref_summary_changemdp">Permet d\'activer la limite de temps par défaut</string>
+    <string name="pref_summary_export">Permet d\'exporter les préférences dans un fichier pour les sauvegarder</string>
+    <string name="pref_summary_language">Choisissez votre langue</string>
+    <string name="pref_summary_notification">Recevez des infos dans la barre d\'état</string>
+    <string name="pref_summary_version">1.0.0</string>
+    <string name="pref_title_auteur">Auteur</string>
+    <string name="pref_title_changemdp">Activation Limite</string>
+    <string name="pref_title_export">Exporter</string>
+    <string name="pref_title_generale">Générale</string>
+    <string name="pref_title_import">Importer</string>
+    <string name="pref_title_import_export">Importer/Exporter</string>
+    <string name="pref_title_language">Langues</string>
+    <string name="pref_title_note">Note</string>
+    <string name="pref_title_notification">Notifications</string>
+    <string name="pref_title_propos">À propos</string>
+    <string name="pref_title_version">Version</string>
     <string name="textview_date_modif">Dernière Modificaiton:</string>
     <string name="textview_majuscule">Majuscule</string>
     <string name="textview_minuscule">Minuscule</string>

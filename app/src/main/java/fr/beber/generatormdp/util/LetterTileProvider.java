@@ -77,7 +77,7 @@ public class LetterTileProvider {
         mColors = res.obtainTypedArray(R.array.letter_tile_colors);
         mTileLetterFontSize = res.getDimensionPixelSize(R.dimen.tile_letter_font_size);
 
-        mDefaultBitmap = BitmapFactory.decodeResource(res, R.drawable.logo);
+        mDefaultBitmap = BitmapFactory.decodeResource(res, R.drawable.ic_launcher);
     }
 
     /**
