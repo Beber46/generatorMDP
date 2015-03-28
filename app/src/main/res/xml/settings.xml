@@ -5,8 +5,14 @@
         <CheckBoxPreference android:key="prefKeyNotification"
                             android:summary="@string/pref_summary_notification"
                             android:title="@string/pref_title_notification"/>
+
+        <CheckBoxPreference android:key="prefKeyChaneMDPDefault"
+                            android:summary="@string/pref_summary_changemdp"
+                            android:defaultValue="true"
+                            android:title="@string/pref_title_changemdp"/>
         <ListPreference
                 android:key="prefKeyDateLimit"
+                android:dependency="prefKeyChaneMDPDefault"
                 android:title="@string/pref_date_limit"
                 android:dialogTitle="@string/pref_date_limit_dialog"
                 android:entries="@array/dateLimits"
@@ -35,6 +41,9 @@
                 android:key="prefKeyVersion"
                 android:summary="@string/pref_summary_version"
                 android:title="@string/pref_title_version"/>
+        <Preference
+                android:key="prefKeyNote"
+                android:title="@string/pref_title_note"/>
         <Preference
                 android:key="prefKeyAuteur"
                 android:summary="@string/pref_summary_auteur"

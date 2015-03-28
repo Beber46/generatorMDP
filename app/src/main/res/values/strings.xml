@@ -33,13 +33,16 @@
     <string name="pref_title_export">Exporter</string>
     <string name="pref_title_import_export">Importer/Exporter</string>
     <string name="pref_date_limit">Limit expiration</string>
-    <string name="pref_date_limit_dialog">Limit expiration</string>
+    <string name="pref_date_limit_dialog">Temps d\'expiration</string>
     <string name="pref_title_version">Version</string>
+    <string name="pref_title_changemdp">Activation Limite</string>
+    <string name="pref_title_note">Note</string>
     <string name="pref_summary_notification">Recevez des infos dans la barre d\'état</string>
     <string name="pref_summary_language">Choisissez votre langue</string>
     <string name="pref_summary_version">1.0.0</string>
     <string name="pref_summary_auteur">Bertrand Lafage développeur indépendant</string>
     <string name="pref_summary_export">Permet d\'exporter les préférences dans un fichier pour les sauvegarder</string>
+    <string name="pref_summary_changemdp">Permet d\'activer la limite de temps par défaut</string>
 
     <string-array name="dateLimits">
         <item name="1">15 Jours</item>
