@@ -1,5 +1,6 @@
 package fr.beber.generatormdp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,7 +64,9 @@ public class ModifyMDPActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_mdp);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        final ActionBar actionBar = getActionBar();
+        if(actionBar!=null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
         final String identifiant = getIntent().getStringExtra(Constante.APPID);
         if(identifiant!=null) {

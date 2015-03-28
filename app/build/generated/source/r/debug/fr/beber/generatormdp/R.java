@@ -105,19 +105,20 @@ public final class R {
         public static final int pref_title_import=0x7f070018;
         public static final int pref_title_import_export=0x7f070019;
         public static final int pref_title_language=0x7f07001a;
-        public static final int pref_title_notification=0x7f07001b;
-        public static final int pref_title_propos=0x7f07001c;
-        public static final int pref_title_version=0x7f07001d;
-        public static final int textview_date_modif=0x7f07001e;
-        public static final int textview_majuscule=0x7f07001f;
-        public static final int textview_minuscule=0x7f070020;
-        public static final int textview_numeric=0x7f070021;
-        public static final int textview_size=0x7f070022;
-        public static final int textview_special=0x7f070023;
-        public static final int title_activity_add_mdp=0x7f070024;
-        public static final int title_activity_main=0x7f070025;
-        public static final int title_activity_mdpdetails=0x7f070026;
-        public static final int title_activity_modify_mdp=0x7f070027;
+        public static final int pref_title_note=0x7f07001b;
+        public static final int pref_title_notification=0x7f07001c;
+        public static final int pref_title_propos=0x7f07001d;
+        public static final int pref_title_version=0x7f07001e;
+        public static final int textview_date_modif=0x7f07001f;
+        public static final int textview_majuscule=0x7f070020;
+        public static final int textview_minuscule=0x7f070021;
+        public static final int textview_numeric=0x7f070022;
+        public static final int textview_size=0x7f070023;
+        public static final int textview_special=0x7f070024;
+        public static final int title_activity_add_mdp=0x7f070025;
+        public static final int title_activity_main=0x7f070026;
+        public static final int title_activity_mdpdetails=0x7f070027;
+        public static final int title_activity_modify_mdp=0x7f070028;
     }
     public static final class xml {
         public static final int settings=0x7f040000;

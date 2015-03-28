@@ -1,5 +1,6 @@
 package fr.beber.generatormdp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,7 +85,9 @@ public class AddMDPActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mdp);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        final ActionBar actionBar = getActionBar();
+        if(actionBar!=null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
         this.seekBadValue = (TextView)findViewById(R.id.seekBarTV);
         seekBadValue.setText(String.valueOf(Constante.MIN_VALUE));
