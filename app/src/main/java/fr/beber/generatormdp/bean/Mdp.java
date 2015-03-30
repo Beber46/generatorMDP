@@ -1,6 +1,6 @@
 package fr.beber.generatormdp.bean;
 
-import fr.beber.generatormdp.util.DateFormat;
+import fr.beber.generatormdp.util.CalendarHelper;
 
 import java.util.Calendar;
 
@@ -206,7 +206,7 @@ public class Mdp {
                 "id=" + id +
                 ", mdp='" + mdp + '\'' +
                 ", level=" + level +
-                ", dateModify=" + DateFormat.getCalendarFormat(dateModify,"dd-MM-yyyy H:m:s") +
+                ", dateModify=" + CalendarHelper.getCalendarFormat(dateModify, "dd-MM-yyyy H:m:s") +
                 ", isNumeric=" + isNumeric +
                 ", isMin=" + isMin +
                 ", isMaj=" + isMaj +

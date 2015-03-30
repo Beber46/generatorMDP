@@ -37,6 +37,15 @@
             android:layout_toRightOf="@id/icon"
             android:gravity="center_vertical"
             android:text="Titre MDP"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
+
+    <ImageView
+            android:id="@+id/iconWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_action_warning"
+            android:layout_alignRight="@+id/secondLine"
+            android:layout_alignEnd="@+id/secondLine"/>
 
 </RelativeLayout>

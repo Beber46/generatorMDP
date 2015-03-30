@@ -12,6 +12,7 @@ import fr.beber.generatormdp.bdd.dao.LevelDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.util.CalendarHelper;
 import fr.beber.generatormdp.util.LetterTileProvider;
 
 import java.util.HashMap;
@@ -45,6 +46,7 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
         final TextView textViewFirst = (TextView) rowView.findViewById(R.id.firstLine);
         final TextView textViewSecond = (TextView) rowView.findViewById(R.id.secondLine);
         final ImageView iconImageView = (ImageView)rowView.findViewById(R.id.icon);
+        final ImageView iconWarning = (ImageView)rowView.findViewById(R.id.iconWarning);
 
         textViewFirst.setText(applicationList.get(position).getName());
 
@@ -60,6 +62,12 @@ public class StableAPPAdapter extends ArrayAdapter<Application> {
 
         final LetterTileProvider letterTileProvider = new LetterTileProvider(context);
         iconImageView.setImageBitmap(letterTileProvider.getLetterIcon(context, textViewFirst.getText().toString()));
+
+        if(Boolean.TRUE.equals(CalendarHelper.compareCalendarExpiration(context, mdp.getDateModify())))
+            iconWarning.setVisibility(View.VISIBLE);
+        else
+            iconWarning.setVisibility(View.INVISIBLE);
+
 
         return rowView;
     }

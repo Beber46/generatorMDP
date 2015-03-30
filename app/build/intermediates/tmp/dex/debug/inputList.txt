@@ -1,1 +1,7 @@
 C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\classes\debug
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-0cf50ddb7c9803da7da887482dfb3deff4a4aeab.jar
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\classes-a84d03a4e5775e5171bcf60b94cb8c9d24f0933d.jar
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-192ad642942b16ceeafbc8286ebee2d70d360552.jar
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\classes-2e4c891d004957788ba0fb1592cf41fde7dea734.jar
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\classes-626e1a7ba6365868fef93a695d75366f4fdfd186.jar
+C:\Users\Bertrand\AndroidstudioProjects\generatorMDP\app\build\intermediates\pre-dexed\debug\classes-a0fbe27e7ad8048b31aee1d7676013a3546009b9.jar

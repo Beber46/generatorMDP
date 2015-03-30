@@ -54,4 +54,17 @@
             android:layout_above="@+id/BTDelete"
             android:textStyle="italic"
             android:layout_alignParentLeft="true"/>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/IVIconWarning"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:src="@drawable/ic_action_warning"
+            android:layout_above="@+id/BTDelete"
+            android:layout_toRightOf="@+id/TVDerniereModif"
+            android:layout_toEndOf="@+id/TVDerniereModif"
+            android:visibility="invisible"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"/>
 </RelativeLayout>
