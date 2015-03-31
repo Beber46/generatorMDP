@@ -24,7 +24,7 @@
             android:id="@+id/TVDescription"
             android:layout_marginLeft="10dp"
             android:layout_alignTop="@+id/IVLogoDetails"
-            android:layout_alignRight="@+id/BTDelete"
+            android:layout_alignRight="@+id/BTModify"
             android:layout_toRightOf="@+id/IVLogoDetails"
             />
 
@@ -40,8 +40,8 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_delete"
-            android:id="@+id/BTDelete"
+            android:text="@string/button_modify"
+            android:id="@+id/BTModify"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
 
@@ -51,7 +51,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/textview_date_modif"
             android:id="@+id/TVDerniereModif"
-            android:layout_above="@+id/BTDelete"
+            android:layout_above="@+id/BTModify"
             android:textStyle="italic"
             android:layout_alignParentLeft="true"/>
 
@@ -61,7 +61,7 @@
             android:id="@+id/IVIconWarning"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:src="@drawable/ic_action_warning"
-            android:layout_above="@+id/BTDelete"
+            android:layout_above="@+id/BTModify"
             android:layout_toRightOf="@+id/TVDerniereModif"
             android:layout_toEndOf="@+id/TVDerniereModif"
             android:visibility="invisible"

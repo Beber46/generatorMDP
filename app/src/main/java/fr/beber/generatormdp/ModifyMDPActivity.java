@@ -15,6 +15,7 @@ import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.settings.UserSettingActivity;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.GenerateMDP;
 
@@ -165,13 +166,19 @@ public class ModifyMDPActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
-        switch (item.getItemId()) {
+        final Intent intent;
+        switch (item.getItemId()){
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.action_add:
+                intent = new Intent(getApplicationContext(),AddMDPActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_settings:
+                intent = new Intent(getApplicationContext(),UserSettingActivity.class);
+                startActivityForResult(intent,Constante.RESULT_SETTINGS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

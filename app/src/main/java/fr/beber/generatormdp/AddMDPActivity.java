@@ -18,6 +18,7 @@ import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.settings.UserSettingActivity;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.GenerateMDP;
 
@@ -169,6 +170,10 @@ public class AddMDPActivity extends Activity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.action_settings:
+                final Intent intent = new Intent(getApplicationContext(),UserSettingActivity.class);
+                startActivityForResult(intent, Constante.RESULT_SETTINGS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

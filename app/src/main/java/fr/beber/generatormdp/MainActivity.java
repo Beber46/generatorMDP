@@ -18,8 +18,6 @@ import java.util.List;
 
 public class MainActivity extends ListActivity {
 
-    private static final int RESULT_SETTINGS = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,24 +63,25 @@ public class MainActivity extends ListActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     */
+    public boolean onOptionsItemSelected(final MenuItem item) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add) {
-            final Intent intent = new Intent(getApplicationContext(),AddMDPActivity.class);
-            startActivity(intent);
-            return true;
+        final Intent intent;
+        switch (item.getItemId()){
+            case R.id.action_add:
+                intent = new Intent(getApplicationContext(),AddMDPActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_settings:
+                intent = new Intent(getApplicationContext(),UserSettingActivity.class);
+                startActivityForResult(intent, Constante.RESULT_SETTINGS);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else if (id == R.id.action_settings) {
-            final Intent intent = new Intent(getApplicationContext(),UserSettingActivity.class);
-            startActivityForResult(intent,RESULT_SETTINGS);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -16,6 +16,7 @@ import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.settings.UserSettingActivity;
 import fr.beber.generatormdp.util.CalendarHelper;
 import fr.beber.generatormdp.util.Constante;
 import fr.beber.generatormdp.util.LetterTileProvider;
@@ -58,15 +59,13 @@ public class MDPDetailsActivity extends Activity {
             final TextView textViewDateDebut = (TextView) findViewById(R.id.TVDerniereModif);
             textViewDateDebut.setText(getResources().getString(R.string.textview_date_modif)+" "+ CalendarHelper.getCalendarFormat(mdp.getDateModify()));
 
-            final Button buttonDelete = (Button)findViewById(R.id.BTDelete);
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
+            final Button buttonModify = (Button)findViewById(R.id.BTModify);
+            buttonModify.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
-                    applicationDAO.open();
-                    applicationDAO.delete(application.getId());
-                    applicationDAO.close();
-
+                    final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);
+                    intent.putExtra(Constante.APPID,String.valueOf(application.getId()));
+                    startActivity(intent);
                     finish();
                 }
             });
@@ -98,15 +97,21 @@ public class MDPDetailsActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        final Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.action_modify:
-                final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);
-                intent.putExtra(Constante.APPID,String.valueOf(application.getId()));
-                startActivity(intent);
+            case R.id.action_delete:
+                final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
+                applicationDAO.open();
+                applicationDAO.delete(application.getId());
+                applicationDAO.close();
                 finish();
+                return true;
+            case R.id.action_settings:
+                intent = new Intent(getApplicationContext(),UserSettingActivity.class);
+                startActivityForResult(intent,Constante.RESULT_SETTINGS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
