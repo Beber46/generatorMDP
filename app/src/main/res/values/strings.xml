@@ -98,4 +98,16 @@
         <item>#cd74e6</item>
         <item>#a47ae2</item>
     </array>
+
+    <string name="title_activity_login">Identification</string>
+
+    <!-- Strings related to login -->
+    <string name="edittext_username">Pseudo</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Valider ou Créer un compte</string>
+    <string name="action_sign_in_short">Valider</string>
+
+    <string name="error_invalid_password">Le mot de passe est trop court</string>
+    <string name="error_password_required">Le mot de passe est requis</string>
+    <string name="error_field_required">Le pseudo est requis</string>
 </resources>

@@ -30,7 +30,7 @@ public class WelcomeActivity extends Activity {
         public void onClick(View v) {
             if(click) {
                 click=false;
-                final Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                final Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

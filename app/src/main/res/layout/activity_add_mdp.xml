@@ -24,6 +24,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:hint="@string/edittext_application"
+                    android:maxLines="1"
+                    android:inputType="textCapWords"
                     android:id="@+id/applicationNameET"/>
 
             <EditText
@@ -94,6 +96,7 @@
             android:text="@string/button_validate"
             android:id="@+id/BTValidate"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"/>
 
 </RelativeLayout>
