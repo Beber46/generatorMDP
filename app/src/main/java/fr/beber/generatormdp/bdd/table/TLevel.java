@@ -1,8 +1,8 @@
 package fr.beber.generatormdp.bdd.table;
 
 /**
- * Cette classe permet de
- * <p/>
+ * Cette interface permet de créer et d'utiliser les champs pour la table LEVEL.
+ *
  * @author Beber46
  * @version 1.0
  */

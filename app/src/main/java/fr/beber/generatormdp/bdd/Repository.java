@@ -3,6 +3,7 @@ package fr.beber.generatormdp.bdd;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import fr.beber.generatormdp.util.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,17 @@ public abstract class Repository<T> implements IRepository<T> {
         cursor.close();
 
         return liste;
+    }
+
+    /**
+     * Permet de faire un count sur le nombre de ligne que retourne le <code>queryBuilder</code>.
+     * @param queryBuilder La requête à exécuter.
+     * @return Le nombre de ligne obtenue.
+     */
+    public int count(final QueryBuilder queryBuilder){
+
+        final Cursor cursor = mBDD.rawQuery(queryBuilder.toSQLString(),queryBuilder.getParamsArray());
+        return cursor.getCount();
     }
 
     /**

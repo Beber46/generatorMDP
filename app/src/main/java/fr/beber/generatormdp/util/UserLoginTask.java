@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import fr.beber.generatormdp.LoginActivity;
 import fr.beber.generatormdp.MainActivity;
+import fr.beber.generatormdp.bdd.dao.UserDAO;
 
 /**
  * Cette classe permet de
@@ -12,14 +13,6 @@ import fr.beber.generatormdp.MainActivity;
  * @version 1.0
  */
 public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "Beber069:hello"
-    };
 
     private final String mNickname;
     private final String mPassword;
@@ -42,16 +35,13 @@ public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
             return false;
         }
 
-        for (String credential : DUMMY_CREDENTIALS) {
-            String[] pieces = credential.split(":");
-            if (pieces[0].equals(mNickname)) {
-                // Account exists, return true if the password matches.
-                return pieces[1].equals(mPassword);
-            }
-        }
+        final UserDAO userDAO = new UserDAO(mLoginActivity.getApplicationContext());
+        userDAO.openOnlyRead();
+        final Boolean retour = userDAO.authentificate(mNickname,mPassword);
+        userDAO.close();
 
         // TODO: register the new account here.
-        return true;
+        return retour;
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.util.Log;
 import fr.beber.generatormdp.bdd.table.TApplication;
 import fr.beber.generatormdp.bdd.table.TLevel;
 import fr.beber.generatormdp.bdd.table.TMDP;
+import fr.beber.generatormdp.bdd.table.TUser;
 
 /**
  * Classe BDD permettant des créer et mettre à jour la base de données. Elle permet également d'accéder aux constantes
@@ -48,6 +49,7 @@ public class BDD extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TLevel.REQUETE_CREATION_LEVEL);
         sqLiteDatabase.execSQL(TApplication.REQUETE_CREATION_APP);
         sqLiteDatabase.execSQL(TMDP.REQUETE_CREATION_MDP);
+        sqLiteDatabase.execSQL(TUser.REQUETE_CREATION_USER);
     }
 
     /**
@@ -65,6 +67,7 @@ public class BDD extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TLevel.TN_LEVEL + ";");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TMDP.TN_MDP + ";");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TApplication.TN_APP + ";");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TUser.TN_USER + ";");
             this.onCreate(sqLiteDatabase);
         }
     }
@@ -75,6 +78,7 @@ public class BDD extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TLevel.TN_LEVEL + ";");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TMDP.TN_MDP + ";");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TApplication.TN_APP + ";");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS  " + TUser.TN_USER + ";");
         this.onCreate(sqLiteDatabase);
         sqLiteDatabase.close();
     }

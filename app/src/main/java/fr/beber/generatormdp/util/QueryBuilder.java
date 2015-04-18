@@ -19,6 +19,10 @@ public class QueryBuilder {
 
     private String orderBy = "";
 
+    /**
+     * Constructeur.
+     * @param select Le select de la requête.
+     */
     public QueryBuilder(final String select) {
         if(!select.toUpperCase().contains("SELECT"))
             this.select = "SELECT "+ select;

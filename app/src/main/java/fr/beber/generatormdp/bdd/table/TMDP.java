@@ -1,7 +1,7 @@
 package fr.beber.generatormdp.bdd.table;
 
 /**
- * Cette classe permet de
+ * Cette interface permet de créer et d'utiliser les champs pour la table MDP.
  *
  * @author Bertrand
  * @version 1.0

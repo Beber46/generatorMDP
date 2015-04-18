@@ -12,9 +12,11 @@ import fr.beber.generatormdp.bdd.BDD;
 import fr.beber.generatormdp.bdd.dao.ApplicationDAO;
 import fr.beber.generatormdp.bdd.dao.LevelDAO;
 import fr.beber.generatormdp.bdd.dao.MdpDAO;
+import fr.beber.generatormdp.bdd.dao.UserDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Level;
 import fr.beber.generatormdp.bean.Mdp;
+import fr.beber.generatormdp.bean.User;
 
 import java.util.List;
 
@@ -148,5 +150,15 @@ public class WelcomeActivity extends Activity {
         applicationDAO.open();
         applicationDAO.save(application1);
         applicationDAO.close();
+
+        final User user = new User();
+        user.setUsername("Beber069");
+        user.setMdp("hello");
+        user.setEmail("beber069@yopmail.com");
+
+        final UserDAO userDAO = new UserDAO(context);
+        userDAO.open();
+        userDAO.save(user);
+        userDAO.close();
     }
 }
