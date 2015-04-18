@@ -25,11 +25,14 @@ import fr.beber.generatormdp.util.LetterTileProvider;
 public class MDPDetailsActivity extends Activity {
 
     private Application application;
+    private Boolean isStop = Boolean.FALSE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mdpdetails);
+
+        this.isStop = Boolean.TRUE;
 
         final ActionBar actionBar = getActionBar();
         if(actionBar!=null)
@@ -63,6 +66,7 @@ public class MDPDetailsActivity extends Activity {
             buttonModify.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    isStop = Boolean.FALSE;
                     final Intent intent = new Intent(getApplicationContext(),ModifyMDPActivity.class);
                     intent.putExtra(Constante.APPID,String.valueOf(application.getId()));
                     startActivity(intent);
@@ -103,6 +107,7 @@ public class MDPDetailsActivity extends Activity {
                 finish();
                 return true;
             case R.id.action_delete:
+                this.isStop = Boolean.FALSE;
                 final ApplicationDAO applicationDAO = new ApplicationDAO(getApplicationContext());
                 applicationDAO.open();
                 applicationDAO.delete(application.getId());
@@ -110,11 +115,28 @@ public class MDPDetailsActivity extends Activity {
                 finish();
                 return true;
             case R.id.action_settings:
+                this.isStop = Boolean.FALSE;
                 intent = new Intent(getApplicationContext(),UserSettingActivity.class);
                 startActivityForResult(intent,Constante.RESULT_SETTINGS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(Boolean.TRUE.equals(this.isStop)) {
+            final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        this.isStop = Boolean.TRUE;
     }
 }

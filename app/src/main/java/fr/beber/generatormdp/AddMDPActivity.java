@@ -25,6 +25,7 @@ import fr.beber.generatormdp.util.GenerateMDP;
 
 public class AddMDPActivity extends Activity {
 
+    private Boolean isStop = Boolean.FALSE;
     private Boolean isNumeric = Boolean.FALSE;
     private Boolean isMinuscule = Boolean.TRUE;
     private Boolean isMajuscule = Boolean.FALSE;
@@ -52,6 +53,7 @@ public class AddMDPActivity extends Activity {
                     mdp.setIsSpec(isSpecial);
 
                     final Intent intent = new Intent(getApplicationContext(), MDPDetailsActivity.class);
+                    isStop = Boolean.FALSE;
 
                     final MdpDAO mdpDAO = new MdpDAO(getApplicationContext());
                     mdpDAO.open();
@@ -85,6 +87,8 @@ public class AddMDPActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mdp);
+
+        this.isStop = Boolean.TRUE;
 
         final ActionBar actionBar = getActionBar();
         if(actionBar!=null)
@@ -172,11 +176,28 @@ public class AddMDPActivity extends Activity {
                 finish();
                 return true;
             case R.id.action_settings:
+                this.isStop = Boolean.FALSE;
                 final Intent intent = new Intent(getApplicationContext(),UserSettingActivity.class);
                 startActivityForResult(intent, Constante.RESULT_SETTINGS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(Boolean.TRUE.equals(this.isStop)) {
+            final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        this.isStop = Boolean.TRUE;
     }
 }
