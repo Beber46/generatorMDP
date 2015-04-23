@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import fr.beber.generatormdp.util.UserLoginTask;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -31,6 +34,25 @@ public class LoginActivity extends Activity{
     private EditText mNickname;
     private View mProgressView;
     private View mLoginFormView;
+
+    /**
+     * Permet de valider le mot de passe pour l'application. Si le mot de passe est supérieur à 6 et comporter au moins un nombre.
+     *
+     * @param password Le mot de passe à valider.
+     * @return <code>true</code> si le mot de passe est supérieur à 6 et comporter au moins un nombre.
+     */
+    public static boolean isPasswordValid(final String password) {
+
+        if(TextUtils.isEmpty(password))
+            return false;
+
+        if(password.length() <= 4)
+            return false;
+
+        final Pattern p = Pattern.compile("([a-zA-Z].*[0-9])");
+        final Matcher m = p.matcher(password);
+        return m.matches();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +109,7 @@ public class LoginActivity extends Activity{
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_password_required));
+            mPasswordView.setError(getString(R.string.error_required));
             focusView = mPasswordView;
             cancel = true;
         }else if (!isPasswordValid(password)) {
@@ -98,7 +120,7 @@ public class LoginActivity extends Activity{
 
         // Check for a valid pseudo address.
         if (TextUtils.isEmpty(pseudo)) {
-            mNickname.setError(getString(R.string.error_field_required));
+            mNickname.setError(getString(R.string.error_required));
             focusView = mNickname;
             cancel = true;
         }
@@ -110,11 +132,6 @@ public class LoginActivity extends Activity{
             mAuthTask = new UserLoginTask(this, pseudo, password);
             mAuthTask.execute((Void) null);
         }
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     /**

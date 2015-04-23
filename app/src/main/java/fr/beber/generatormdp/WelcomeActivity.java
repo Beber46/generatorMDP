@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +17,6 @@ import fr.beber.generatormdp.bdd.dao.UserDAO;
 import fr.beber.generatormdp.bean.Application;
 import fr.beber.generatormdp.bean.Level;
 import fr.beber.generatormdp.bean.Mdp;
-import fr.beber.generatormdp.bean.User;
 
 import java.util.List;
 
@@ -32,7 +32,18 @@ public class WelcomeActivity extends Activity {
         public void onClick(View v) {
             if(click) {
                 click=false;
-                final Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                final Intent intent;
+
+                final UserDAO userDAO = new UserDAO(getApplicationContext());
+                userDAO.openOnlyRead();
+
+                if(userDAO.getAll().size()>0)
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                else
+                    intent = new Intent(getApplicationContext(), CreateUserActivity.class);
+
+                userDAO.close();
+
                 startActivity(intent);
                 finish();
             }
@@ -47,6 +58,7 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         final ImageView imageViewLogo = (ImageView)findViewById(R.id.IVLogo);
 
         imageViewLogo.setOnClickListener(this.clickListenerLogo);
@@ -150,15 +162,5 @@ public class WelcomeActivity extends Activity {
         applicationDAO.open();
         applicationDAO.save(application1);
         applicationDAO.close();
-
-        final User user = new User();
-        user.setUsername("Beber069");
-        user.setMdp("hello");
-        user.setEmail("beber069@yopmail.com");
-
-        final UserDAO userDAO = new UserDAO(context);
-        userDAO.open();
-        userDAO.save(user);
-        userDAO.close();
     }
 }

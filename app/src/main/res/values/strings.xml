@@ -100,14 +100,19 @@
     </array>
 
     <string name="title_activity_login">Identification</string>
+    <string name="title_activity_createuser">Inscription</string>
 
-    <!-- Strings related to login -->
     <string name="edittext_username">Pseudo</string>
+    <string name="edittext_email">Email</string>
+    <string name="edittext_password">Mot de passe</string>
+    <string name="edittext_confirm_password">Confirme mot de passe</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Valider ou Créer un compte</string>
+    <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Valider</string>
 
-    <string name="error_invalid_password">Le mot de passe est trop court</string>
-    <string name="error_password_required">Le mot de passe est requis</string>
-    <string name="error_field_required">Le pseudo est requis</string>
+    <string name="error_invalid_password">4 caractères et au moins un nombre</string>
+    <string name="error_invalid_nickname">Trop court</string>
+    <string name="error_invalid_email">Invalide</string>
+    <string name="error_invalid_confirm_email">Non identique</string>
+    <string name="error_required">Requis</string>
 </resources>

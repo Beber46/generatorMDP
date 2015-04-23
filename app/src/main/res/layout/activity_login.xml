@@ -53,7 +53,8 @@
                 android:maxLines="1"
                 android:singleLine="true"/>
 
-        <Button
+
+            <Button
                 android:id="@+id/BTLogin"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
@@ -61,6 +62,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"/>
+
 
     </LinearLayout>
 

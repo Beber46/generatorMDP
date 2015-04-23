@@ -27,8 +27,8 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="fr.beber.generatormdp.WelcomeActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.beber.generatormdp.WelcomeActivity" />
         </activity>
         <activity android:name=".settings.UserSettingActivity" >
         </activity>
@@ -57,6 +57,11 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name=".CreateUserActivity"
+            android:label="@string/title_activity_createuser"
+            android:theme="@style/AppThemePrinc">
         </activity>
     </application>
 

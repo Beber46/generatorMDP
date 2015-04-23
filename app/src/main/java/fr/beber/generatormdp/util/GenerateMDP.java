@@ -66,6 +66,7 @@ public class GenerateMDP {
 
     /**
      * Permet de récupérer le niveau d'un mot de passe qui vient d'être généré par {@link #getPassWord()}.
+     *
      * @return le niveau du mot de passe.
      */
     public Integer getLevel() {
@@ -74,21 +75,22 @@ public class GenerateMDP {
 
     /**
      * Permet de créer le mot de passe.
+     *
      * @return le mot de passe généré.
      */
-    public String getPassWord(){
+    public String getPassWord() {
 
         final List<String> operation = this.getTraitement();
 
         String password = "";
         final int max = operation.size();
-        int position = this.getRandomValue(0,max-1);
+        int position = this.getRandomValue(0, max - 1);
 
-        while(password.length()<this.size){
+        while (password.length() < this.size) {
             final String op = operation.get(position);
-            password = password + op.charAt(this.getRandomValue(0, op.length()-1));
+            password = password + op.charAt(this.getRandomValue(0, op.length() - 1));
 
-            position = this.getRandomValue(0,max-1);
+            position = this.getRandomValue(0, max - 1);
         }
 
         return password;
@@ -96,23 +98,24 @@ public class GenerateMDP {
 
     /**
      * Permet de créer la liste d'élément nécessaire pour la création du mot de passe.
+     *
      * @return une liste de string.
      */
-    private List<String> getTraitement(){
+    private List<String> getTraitement() {
 
 
         final List<String> operation = new ArrayList<String>();
 
-        if(Boolean.TRUE.equals(this.isNumeric))
+        if (Boolean.TRUE.equals(this.isNumeric))
             operation.add("0123456789");
 
-        if(Boolean.TRUE.equals(this.isMinuscule))
+        if (Boolean.TRUE.equals(this.isMinuscule))
             operation.add("azertyuiopmlkjhgfdsqwxcvbn");
 
-        if(Boolean.TRUE.equals(this.isMajuscule))
+        if (Boolean.TRUE.equals(this.isMajuscule))
             operation.add("QSDFGHJKLMAZERTYUIOPWXCVBN");
 
-        if(Boolean.TRUE.equals(this.isSpecial))
+        if (Boolean.TRUE.equals(this.isSpecial))
             operation.add("#!?$%&*");
 
         final LevelDAO levelDAO = new LevelDAO(this.context);
@@ -120,9 +123,9 @@ public class GenerateMDP {
         final List<Level> levelList = levelDAO.getAll();
         levelDAO.close();
 
-        if(operation.size()<=2)
+        if (operation.size() <= 2)
             level = levelList.get(0).getId(); //min
-        else if (operation.size()<=3)
+        else if (operation.size() <= 3)
             level = levelList.get(1).getId(); //medium
         else
             level = levelList.get(2).getId(); //high
@@ -132,13 +135,14 @@ public class GenerateMDP {
 
     /**
      * Permet de générer un nombre vraiment aléatoire.
+     *
      * @param min le nombre minimal.
      * @param max le nombre maximal.
      * @return le nombre généré.
      */
-    private int getRandomValue(final int min, final int max){
+    private int getRandomValue(final int min, final int max) {
 
-        return min + (int)(Math.random() * ((max - min) + 1));
+        return min + (int) (Math.random() * ((max - min) + 1));
     }
 
     @Override

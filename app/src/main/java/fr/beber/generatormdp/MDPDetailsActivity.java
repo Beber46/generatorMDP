@@ -104,6 +104,7 @@ public class MDPDetailsActivity extends Activity {
         final Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
+                this.isStop = Boolean.FALSE;
                 finish();
                 return true;
             case R.id.action_delete:

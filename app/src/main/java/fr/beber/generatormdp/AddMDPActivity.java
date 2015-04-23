@@ -173,6 +173,7 @@ public class AddMDPActivity extends Activity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
+                this.isStop = Boolean.FALSE;
                 finish();
                 return true;
             case R.id.action_settings:
